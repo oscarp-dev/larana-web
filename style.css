@@ -1,0 +1,123 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body{
+    background-color: rgba(116, 116, 116, 0.459);
+}
+header{
+    background-color: white;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 8px;
+    border: 1.5px solid #0000007a;
+}
+.logo{
+    padding: 15px;
+    position: static;
+}
+nav{
+    display: flex;
+    margin: auto;
+    gap: 40px;
+    font-size: 17px;
+    margin-left: 10px;
+}
+.contacto{
+    text-decoration: none;
+    color: black;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 18px;
+    text-align: right;
+    margin-right: 30px;
+}
+nav a{
+    text-decoration: none;
+    color: black;
+    padding: 3px;
+    border-radius: px;
+}
+nav a:hover {
+    color: rgb(0, 0, 0);
+    background-color: rgba(110, 110, 110, 0.164);
+}
+
+@media (max-width: 430px) {
+    header, nav {
+        flex-direction: column;
+    }
+    nav{
+        margin-top: 15px;
+        align-items: center;
+    }
+}
+
+
+/*   IMAGENES   */
+
+.contenedorimg{
+    margin-right: 30px;
+    margin-top: 17px;
+}
+
+.imagenescabezera{
+    border-radius: 3px;
+    padding: 5px;
+    width: 33px;
+    display: inline;
+    margin: 10px;
+    margin-right: 20px;
+    
+}
+
+.imagenescabezera:hover{
+    background-color: #77777777;
+}
+
+
+
+/*   BUSCADOR   */
+
+div, fieldset{
+     margin: 0;
+     padding: 0;
+     border: 0;
+     font-size: 100%;
+     font: inherit;
+ }
+ .cajabuscar {
+     width: 200%;
+     max-width: 600px;
+     margin-bottom: 35px;
+     margin-top: 15px;
+     margin-left: 600px;
+     margin-right: auto;
+     display: inline-block;
+     text-align: left;
+ }
+ #buscarform {
+     padding: 0;
+     float: left;
+     clear: both;
+     width: 100%;
+     position: relative;
+ }
+ 
+ #buscarform fieldset { width: 100% }
+ #s {
+     width: 100%;
+     background-color: #b1b1b154;
+     float: left;
+     padding: 8px 0;
+     text-indent: 10px;
+     color: #555555;
+     border: 1px solid #fff; 
+     box-sizing: border-box;
+     height: 50px;
+     border-radius: 40px;
+ }

@@ -1,0 +1,55 @@
+.login{
+        background-color: rgba(173, 173, 173, 0.322);
+ }
+
+.div02{
+    background-color: white;
+    width: 350px; 
+    height: 500px; 
+    padding: 30px; 
+    border-radius: 10px; 
+    border-width: 2px;
+    margin: auto; 
+    margin-top: 150px; 
+ }
+
+.div01{
+    display: flex;
+ }
+
+
+ h2{
+    font-size:30px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+ }
+
+ label{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    font-size: 20px; 
+    font-weight: bold;
+ }
+
+.cuadrotexto{
+    height: 30px; 
+    width: 330px; 
+    border-radius: 7px; 
+    margin-top: 10px;
+    border-color: rgba(66, 66, 66, 0.329);
+}
+
+.boton{
+    height: 30px; 
+    border-radius: 4px; 
+    margin-top: 30px;
+    border-color: rgba(124, 124, 124, 0.267);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+p{
+    color: rgb(54, 54, 54);
+}
+
+a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
