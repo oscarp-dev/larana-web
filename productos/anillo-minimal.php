@@ -1,54 +1,58 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anillo Minimal | LARANA JEWELRY</title>
+<?php include("../includes/header.php"); ?>
 
-  <!-- CSS general -->
-  <link rel="stylesheet" href="../style.css">
-  <!-- CSS específico de producto -->
-  <link rel="stylesheet" href="../producto.css">
-</head>
-<body>
-  <header class="main-header">
-    <h1 class="logo">LARANA JEWELRY</h1>
-  </header>
+<link rel="stylesheet" href="../producto.css">
 
-  <main class="producto-detalle">
-    <!-- Columna izquierda: imagen -->
+<section class="producto-detalle container">
+  <div class="producto-layout">
+
+    <!-- Imagen destacada -->
     <div class="producto-media">
-      <img src="../Images/producto1.jpg" alt="Anillo Minimal">
+      <div class="carousel">
+        <img src="../images/producto1.jpg" alt="Anillo Minimal">
+      </div>
     </div>
 
-    <!-- Columna derecha: información -->
+    <!-- Información del producto -->
     <div class="producto-info">
-      <h2>Anillo Minimal</h2>
+      <h1 class="titulo">Anillo Minimal</h1>
       <p class="precio">€90</p>
+      <p class="precio-info">Impuestos incluidos — Envío gratuito desde 50€</p>
 
-      <button class="btn-primario">Añadir al carrito</button>
+      <button class="btn-dorado">Añadir al carrito</button>
 
-      <ul class="bullets">
-        <li>Water resistant</li>
-        <li>Hipoalergénico</li>
-        <li>Garantía de 3 años</li>
-        <li>Cambios fáciles</li>
+      <ul class="atributos">
+        <li>💧 Water resistant</li>
+        <li>🌿 Hipoalergénico</li>
+        <li>💎 Garantía de 3 años</li>
+        <li>🔄 Cambios fáciles</li>
       </ul>
 
-      <details>
-        <summary>Descripción</summary>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-           Suspendisse facilisis lorem nec nisl tempor, vel tristique 
-           sapien convallis.</p>
-      </details>
+      <div class="detalles">
+        <details class="detalle" open>
+          <summary>Descripción</summary>
+          <p>
+            Inspirado en la simplicidad de la forma natural, el <strong>Anillo Minimal</strong> combina elegancia y ligereza en una pieza única. 
+            Elaborado en acero inoxidable con baño de oro de 18k, es resistente al agua, hipoalergénico y libre de níquel.
+          </p>
+          <p>
+            Ideal para uso diario o para complementar tu look más sofisticado. Su diseño versátil encarna la esencia de la joyería contemporánea.
+          </p>
+        </details>
 
-      <details>
-        <summary>Envíos y devoluciones</summary>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-           Devoluciones en 30 días. Envíos gratuitos desde 50€.</p>
-      </details>
+        <details class="detalle">
+          <summary>Envíos y devoluciones</summary>
+          <p>
+            Envíos gratuitos a partir de 50€.  
+            Entregas entre 2 y 5 días laborables.  
+            Cambios y devoluciones disponibles en un plazo de 14 días sin coste adicional.
+          </p>
+        </details>
+      </div>
+
     </div>
-  </main>
-</body>
-</html>
+  </div>
+</section>
+
+<?php include("../includes/footer.php"); ?>
+
 

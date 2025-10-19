@@ -1,86 +1,178 @@
 /* ===================
-   PRODUCTO DETALLE
+   PRODUCTO DETALLE — Versión Refinada
 =================== */
 
 .producto-detalle {
+  padding: 140px 0 120px;
+  display: flex;
+  justify-content: center;
+}
+
+.producto-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
-  margin-top: 80px; /* espacio bajo el header fijo */
-  padding-bottom: 100px;
-}
-
-.producto-media img {
+  grid-template-columns: 1.2fr 1fr;
+  align-items: flex-start;
+  gap: 80px;
+  max-width: 1300px;
   width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  object-fit: cover;
+  padding: 0 8%;
 }
 
-/* Información del producto */
+/* ===== Imagen ===== */
+.producto-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
+  border-radius: 18px;
+  overflow: hidden;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+}
+
+.carousel img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 16px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.carousel:hover img {
+  transform: scale(1.03);
+}
+
+
+/* ===== Información ===== */
 .producto-info {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 1.8rem;
+  justify-content: center;
 }
 
-.producto-info h2 {
-  font-size: 1.9rem;
-  font-weight: 500;
-  margin: 0;
-}
-
-.producto-info .precio {
-  font-size: 1.3rem;
-  color: var(--dorado);
+.titulo {
+  font-size: 2.2rem;
   font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--negro);
+  margin-bottom: 0.4rem;
 }
 
-.producto-info .btn-line {
-  max-width: 220px;
-  margin-top: 8px;
+.precio {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #c5a363; /* dorado elegante */
+  margin: 0.4rem 0 0.2rem;
+  letter-spacing: 0.4px;
 }
 
-.bullets {
+.precio-info {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: -2px;
+  margin-bottom: 1.2rem;
+}
+
+
+/* ===== Botón ===== */
+.btn-dorado {
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  padding: 18px 64px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+.btn-dorado:hover {
+  background: var(--dorado);
+  color: #111;
+  transform: translateY(-2px);
+}
+
+/* ===== Atributos ===== */
+.atributos {
   list-style: none;
   padding: 0;
-  margin: 16px 0;
-  line-height: 1.8;
-  color: var(--negro);
-}
-
-details {
-  background: var(--gris);
-  border-radius: 10px;
-  padding: 14px 18px;
-  border: 1px solid var(--borde);
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #555;
   font-size: 0.95rem;
-  transition: all .25s ease;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
-details summary {
-  cursor: pointer;
+/* ===== Detalles (accordion) ===== */
+.detalles {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detalle {
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.detalle summary {
+  font-size: 1.05rem;
   font-weight: 600;
-  color: var(--negro);
+  color: #111;
+  cursor: pointer;
+  position: relative;
   list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  transition: color 0.2s ease;
 }
 
-details[open] {
-  background: var(--beige);
-  border-color: var(--dorado);
+.detalle summary:hover {
+  color: var(--dorado);
 }
 
-/* Botón volver */
-.btn-dark {
-  align-self: flex-start;
-  margin-top: 20px;
+.detalle summary::after {
+  content: "+";
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
 }
 
-/* Responsivo */
-@media (max-width: 900px) {
-  .producto-detalle {
+.detalle[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.detalle p {
+  margin: 0.5rem 0 0;
+  color: #555;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  animation: fadeIn 0.4s ease;
+  max-width: 90%;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 950px) {
+  .producto-layout {
     grid-template-columns: 1fr;
+    gap: 40px;
     text-align: center;
   }
 
@@ -88,11 +180,12 @@ details[open] {
     align-items: center;
   }
 
-  .producto-info .btn-line {
-    max-width: 100%;
+  .btn-dorado {
+    margin: 0 auto;
   }
 
-  .btn-dark {
-    align-self: center;
+  .detalle p {
+    max-width: 100%;
   }
 }
+
