@@ -416,3 +416,55 @@ a.btn-line:visited {
     justify-content: center;
   }
 }
+/* ===================
+   NUEVAS SECCIONES
+=================== */
+.opciones {
+  padding: 90px 0;
+  text-align: center;
+  border-top: 1px solid var(--borde);
+  border-bottom: 1px solid var(--borde);
+}
+
+.opciones h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.grid-opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.btn-opcion {
+  display: inline-block;
+  padding: 14px 28px;
+  background-color: var(--negro);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 28px;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-opcion:hover {
+  background-color: var(--dorado);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* === Responsive === */
+@media (max-width: 950px) {
+  .grid-opciones {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .btn-opcion {
+    width: 80%;
+    margin: 0 auto;
+  }
+}

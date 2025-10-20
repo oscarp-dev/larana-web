@@ -22,20 +22,19 @@ $usuario = $_SESSION['usuario'] ?? null;
   <?php endif; ?>
 </head>
 <body>
-  
 <header class="main-header">
   <div class="header-left">
     <nav class="top-nav">
-      <a href="/larana/index.php#productos">Pulseras</a>
-      <a href="/larana/index.php#categorias">Collares</a>
-      <a href="/larana/index.php#categorias">Brazaletes</a>
-      <a href="/larana/index.php#categorias">Anillos</a>
-      <a href="/larana/index.php#contacto">Contáctanos</a>
+      <a href="/J_S25_Tienda_Online/pulseras.php">Pulseras</a>
+      <a href="/J_S25_Tienda_Online/collares.php">Collares</a>
+      <a href="/J_S25_Tienda_Online/brazaletes.php">Brazaletes</a>
+      <a href="/J_S25_Tienda_Online/anillos.php">Anillos</a>
+      <a href="/J_S25_Tienda_Online/contactame.php">Contáctanos</a>
     </nav>
   </div>
 
   <div class="header-center">
-    <a href="/larana/index.php#hero" class="brand" aria-label="LARANA JEWELRY">LARANA JEWELRY</a>
+    <a href="/J_S25_Tienda_Online/index.php#hero" class="brand" aria-label="LARANA JEWELRY">LARANA JEWELRY</a>
   </div>
 
   <div class="header-right">
@@ -48,10 +47,10 @@ $usuario = $_SESSION['usuario'] ?? null;
     <?php if ($usuario): ?>
       <div class="user-greeting">
         <span>Hola, <?= htmlspecialchars($usuario['nombre']) ?> 👋</span>
-        <a href="/larana/tienda_login_php/logout.php" class="logout-link" title="Cerrar sesión">Cerrar sesión</a>
+        <a href="/J_S25_Tienda_Online/tienda_login_php/logout.php" class="logout-link" title="Cerrar sesión">Cerrar sesión</a>
       </div>
     <?php else: ?>
-      <a href="/larana/tienda_login_php/login.php" class="icon-link" title="Usuario" id="userLoginLink">
+      <a href="/J_S25_Tienda_Online/tienda_login_php/login.php" class="icon-link" title="Usuario" id="userLoginLink">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24">
           <circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 14 0v1"/>
         </svg>

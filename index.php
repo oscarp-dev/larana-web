@@ -102,6 +102,18 @@ $usuario = $_SESSION['usuario'] ?? null;
     </div>
   </section>
 
+  <!-- NUEVAS SECCIONES -->
+  <section id="opciones" class="opciones container">
+    <h2>Explora nuestras secciones</h2>
+    <div class="grid-opciones">
+      <a class="btn-opcion" href="pulseras.php">Pulseras</a>
+      <a class="btn-opcion" href="collares.php">Collares</a>
+      <a class="btn-opcion" href="brazaletes.php">Brazaletes</a>
+      <a class="btn-opcion" href="anillos.php">Anillos</a>
+      <a class="btn-opcion" href="contactame.php">Contáctame</a>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer id="contacto" class="footer">
     <div class="container footer-inner">
