@@ -11,8 +11,8 @@ if (session_status() === PHP_SESSION_NONE) {
 // ============================
 $host = '127.0.0.1';
 $dbname = 'tienda';
-$username = 'root';
-$dbpassword = '';
+$username = 'tienda_user';      // el usuario que creaste
+$dbpassword = 'TuContraseña';   // la contraseña que pusiste
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $dbpassword);
@@ -120,4 +120,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </body>
 </html>
-

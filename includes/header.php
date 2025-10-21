@@ -12,24 +12,25 @@ $usuario = $_SESSION['usuario'] ?? null;
   <title>LARANA JEWELRY</title>
 
   <!-- Estilos globales -->
-  <link rel="stylesheet" href="/larana/style.css">
+  <link rel="stylesheet" href="/J_S25_Tienda_Online/style.css">
 
   <!-- Estilos de producto (solo si estás en la carpeta productos) -->
   <?php 
   $rutaActual = $_SERVER['PHP_SELF'];
   if (strpos($rutaActual, '/productos/') !== false): ?>
-    <link rel="stylesheet" href="/larana/productos/producto.css">
+    <link rel="stylesheet" href="/J_S25_Tienda_Online/productos/producto.css">
   <?php endif; ?>
 </head>
 <body>
+  
 <header class="main-header">
   <div class="header-left">
     <nav class="top-nav">
-      <a href="/J_S25_Tienda_Online/pulseras.php">Pulseras</a>
-      <a href="/J_S25_Tienda_Online/collares.php">Collares</a>
-      <a href="/J_S25_Tienda_Online/brazaletes.php">Brazaletes</a>
-      <a href="/J_S25_Tienda_Online/anillos.php">Anillos</a>
-      <a href="/J_S25_Tienda_Online/contactame.php">Contáctanos</a>
+      <a href="pulseras.php">Pulseras</a>
+      <a href="collares.php">Collares</a>
+      <a href="brazaletes.php">Brazaletes</a>
+      <a href="anillos.php">Anillos</a>
+      <a href="contactame.php">Contáctanos</a>
     </nav>
   </div>
 
