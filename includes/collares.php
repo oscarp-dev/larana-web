@@ -1,0 +1,49 @@
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: tienda_login_php/login.php');
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Collares</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<?php include 'includes/header.php'; ?>
+
+<main class="container opciones">
+    <h1>Collares</h1>
+    <p>Bienvenido a la sección de Collares. Aquí puedes explorar todos nuestros collares.</p>
+
+    <div class="grid-opciones">
+        <?php
+        $collares = [
+            ['nombre' => 'Collar Minimal', 'imagen' => 'Images/placeholder.png', 'precio' => '25€'],
+            ['nombre' => 'Collar Elegante', 'imagen' => 'Images/placeholder.png', 'precio' => '30€'],
+            ['nombre' => 'Collar Colorido', 'imagen' => 'Images/placeholder.png', 'precio' => '28€']
+        ];
+
+        foreach ($collares as $collar):
+        ?>
+            <div class="producto">
+                <div class="producto-media">
+                    <img src="<?= $collar['imagen'] ?>" alt="<?= htmlspecialchars($collar['nombre']) ?>">
+                </div>
+                <h3><?= htmlspecialchars($collar['nombre']) ?></h3>
+                <span class="precio"><?= $collar['precio'] ?></span>
+                <button class="btn-line">Ver detalle</button>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</main>
+
+<?php include 'includes/footer.php'; ?>
+
+</body>
+</html>

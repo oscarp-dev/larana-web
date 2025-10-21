@@ -2,24 +2,7 @@
 // ============================
 // 🔐 INICIO DE SESIÓN
 // ============================
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// ============================
-// ⚙️ CONFIGURACIÓN DE LA BD
-// ============================
-$host = '127.0.0.1';
-$dbname = 'tienda';
-$username = 'tienda_user';      // el usuario que creaste
-$dbpassword = 'TuContraseña';   // la contraseña que pusiste
-
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $dbpassword);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("❌ Error de conexión: " . $e->getMessage());
-}
+require_once "db_connect.php";
 
 // ============================
 // 🧩 VARIABLES Y VALIDACIÓN
@@ -60,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
 
             // 🔁 Redirigir a la página principal
-            header("Location: ../index.php");
+            header("Location: /J_S25_Tienda_Online/index.php");
             exit;
         } else {
             $errors[] = "❌ Email o contraseña incorrectos.";

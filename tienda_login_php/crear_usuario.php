@@ -1,8 +1,8 @@
 <?php
-$host = '127.0.0.1';
+$host = '100.72.131.53';
 $dbname = 'tienda';
-$username = 'tienda_user';
-$dbpassword = 'TuContraseña'; // la que definiste
+$username = 'sanenfcor';
+$dbpassword = '0147'; // la que definiste
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $dbpassword);

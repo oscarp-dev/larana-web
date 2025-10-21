@@ -18,7 +18,12 @@
       <p class="precio">€90</p>
       <p class="precio-info">Impuestos incluidos — Envío gratuito desde 50€</p>
 
-      <button class="btn-dorado">Añadir al carrito</button>
+      <form action="/J_S25_Tienda_Online/tienda_login_php/carrito.php" method="POST">
+        <input type="hidden" name="id" value="1">
+        <input type="hidden" name="nombre" value="Anillo Minimal">
+        <input type="hidden" name="precio" value="90">
+        <button type="submit" name="add_to_cart" class="btn-dorado">Añadir al carrito</button>
+      </form>
 
       <ul class="atributos">
         <li>💧 Water resistant</li>

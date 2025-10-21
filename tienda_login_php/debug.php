@@ -1,5 +1,6 @@
 <?php
 // debug.php: muestra todo lo que llega desde el formulario
+require_once "db_connect.php";
 
 // $_POST contiene los datos enviados por el formulario con method="post"
 echo "<h2>Contenido de \$_POST</h2>";

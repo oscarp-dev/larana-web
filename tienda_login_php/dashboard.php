@@ -1,6 +1,5 @@
 <?php
-session_start();
-
+require_once "db_connect.php";
 // Verificar que el usuario esté logueado
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
@@ -29,4 +28,3 @@ $usuario = $_SESSION['usuario'];
 
 </body>
 </html>
-

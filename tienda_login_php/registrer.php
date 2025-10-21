@@ -1,18 +1,5 @@
 <?php
-// ----------------------------
-// 🧠 1. Conexión a la base de datos
-// ----------------------------
-$host = '127.0.0.1';
-$dbname = 'tienda';
-$username = 'root';
-$password = '';
-
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("❌ Error de conexión: " . $e->getMessage());
-}
+require_once "db_connect.php";
 
 // ----------------------------
 // 🧩 2. Lógica del registro
@@ -45,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = "⚠️ Debes aceptar los términos y condiciones.";
     } else {
         // 🔍 Verificar si el email ya existe
-        $check = $conn->prepare("SELECT id FROM usuarios WHERE email = :email");
+        $check = $pdo->prepare("SELECT id FROM usuarios WHERE email = :email");
         $check->execute(['email' => $email]);
 
         if ($check->rowCount() > 0) {
@@ -55,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // 💾 Insertar usuario
-            $stmt = $conn->prepare("
+            $stmt = $pdo->prepare("
                 INSERT INTO usuarios (nombre, apellido, email, password, telefono, direccion, acepta_terminos)
                 VALUES (:nombre, :apellido, :email, :password, :telefono, :direccion, :acepta)
             ");
