@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 🧠 PROCESAR LOGIN
     // ============================
     if (empty($errors)) {
-        $stmt = $conn->prepare("SELECT id, password, nombre, email, admin FROM usuarios WHERE email = :email");
+        $stmt = $conn->prepare("SELECT id, password, nombre, apellido, email, admin FROM usuarios WHERE email = :email");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['usuario'] = [
                 'id' => $user['id'],
                 'nombre' => $user['nombre'],
+                'apellido' => $user['apellido'],
                 'email' => $user['email'],
                 'admin' => $user['admin']
             ];

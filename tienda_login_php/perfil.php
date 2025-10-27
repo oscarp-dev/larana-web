@@ -90,6 +90,7 @@ include __DIR__ . '/../includes/header.php';
                         echo "<td>" . ($u['admin'] ? 'TRUE' : 'FALSE') . "</td>";
                         echo "<td>{$u['fecha_registro']}</td>";
                         echo "<td><a href='/J_S25_Tienda_Online/tienda_login_php/modificar_usuarios.php?id={$u['id']}'>Editar</a></td>";
+                        echo "<td><a href='/J_S25_Tienda_Online/tienda_login_php/ver_historial.php?id={$u['id']}'>Historial de compra</a></td>";
                         echo "</tr>";
                     }
                     echo "</table>";
