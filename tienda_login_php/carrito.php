@@ -1,9 +1,9 @@
 <?php
-require_once "db_connect.php";
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+require_once "db_connect.php";
+
 
 // Inicializar carrito
 if (!isset($_SESSION['carrito']) || !is_array($_SESSION['carrito'])) {
@@ -77,7 +77,6 @@ if (isset($_GET['clear'])) {
     exit;
 }
 
-// 💰 Calcular total
 $total = 0;
 foreach ($_SESSION['carrito'] as $it) {
     $total += $it['precio'] * ($it['cantidad'] ?? 1);
@@ -87,11 +86,10 @@ include __DIR__ . '/../includes/header.php';
 ?>
 
 
-<link rel="stylesheet" href="/style.css">
-<link rel="stylesheet" href="/producto.css">
+<link rel="stylesheet" href="../productos/producto.css">
 
 <main class="container" style="padding: 40px 0;">
-  <h2 class="title">🛒 Tu carrito</h2>
+  <h2 class="title">Tu carrito</h2>
 
   <?php if (empty($_SESSION['carrito'])): ?>
     <p class="muted">Tu carrito está vacío. Explora la colección y añade tus favoritos.</p>

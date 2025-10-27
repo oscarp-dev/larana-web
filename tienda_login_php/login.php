@@ -1,15 +1,21 @@
 <?php
-// ============================
-// 🔐 INICIO DE SESIÓN
-// ============================
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once "db_connect.php";
 
-// ============================
-// 🧩 VARIABLES Y VALIDACIÓN
-// ============================
 $errors = [];
 $email = trim($_POST['email'] ?? '');
 $password = trim($_POST['password'] ?? '');
+
+// ✅ Guardar la última página visitada (si no estamos en login o register)
+if (!isset($_SESSION['ultima_pagina']) && isset($_SERVER['HTTP_REFERER'])) {
+    $referer = $_SERVER['HTTP_REFERER'];
+    if (strpos($referer, 'login.php') === false && strpos($referer, 'registrer.php') === false) {
+        $_SESSION['ultima_pagina'] = $referer;
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar email
@@ -30,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 🧠 PROCESAR LOGIN
     // ============================
     if (empty($errors)) {
-        $stmt = $conn->prepare("SELECT id, password, nombre, email FROM usuarios WHERE email = :email");
+        $stmt = $conn->prepare("SELECT id, password, nombre, email, admin FROM usuarios WHERE email = :email");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -39,10 +45,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['usuario'] = [
                 'id' => $user['id'],
                 'nombre' => $user['nombre'],
-                'email' => $user['email']
+                'email' => $user['email'],
+                'admin' => $user['admin']
             ];
 
-            // 🔁 Redirigir a la página principal
+            // ✅ Redirigir a la última página visitada si existe
+            if (!empty($_SESSION['ultima_pagina'])) {
+                $destino = $_SESSION['ultima_pagina'];
+                unset($_SESSION['ultima_pagina']); // limpiar
+                header("Location: $destino");
+                exit;
+            }
+
+            // 🔁 Si no hay página anterior, ir al inicio
             header("Location: /J_S25_Tienda_Online/index.php");
             exit;
         } else {
@@ -82,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     <?php endif; ?>
 
-    <form method="post" action="login.php" novalidate>
+    <form method="post" action="/J_S25_Tienda_Online/tienda_login_php/login.php" novalidate>
       <label for="email">Email</label>
       <input id="email" name="email" type="email"
              value="<?= htmlspecialchars($email) ?>"
@@ -97,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <button type="submit">Entrar</button>
 
-      <p>¿No tienes cuenta? <a href="registrer.php">Crear cuenta nueva</a></p>
+      <p>¿No tienes cuenta? <a href="register.php">Crear cuenta nueva</a></p>
     </form>
   </div>
 

@@ -22,7 +22,7 @@ $usuario = $_SESSION['usuario'] ?? null;
   <?php 
   $rutaActual = $_SERVER['PHP_SELF'];
   if (strpos($rutaActual, '/productos/') !== false): ?>
-    <link rel="stylesheet" href="/J_S25_Tienda_Online/productos/producto.css">
+    <link rel="stylesheet" href="../productos/producto.css">
   <?php endif; ?>
 
   <style>
@@ -118,17 +118,17 @@ $usuario = $_SESSION['usuario'] ?? null;
 
     <!-- Menú de navegación (solo visible ≥1400px) -->
     <nav class="top-nav d-flex header-left">
-      <a href="pulseras.php">Pulseras</a>
-      <a href="collares.php">Collares</a>
-      <a href="brazaletes.php">Brazaletes</a>
-      <a href="anillos.php">Anillos</a>
-      <a href="contactame.php">Contáctanos</a>
+      <a href="/J_S25_Tienda_Online/includes/pulseras.php">Pulseras</a>
+      <a href="/J_S25_Tienda_Online/includes/collares.php">Collares</a>
+      <a href="/J_S25_Tienda_Online/includes/pendientes.php">Pendientes</a>
+      <a href="/J_S25_Tienda_Online/includes/anillos.php">Anillos</a>
+      <a href="/J_S25_Tienda_Online/includes/contactame.php">Contáctanos</a>
     </nav>
   </div>
 
   <!-- Sección centro -->
   <div class="header-section header-center">
-    <a href="./index.php#hero" class="brand" aria-label="LARANA JEWELRY">LARANA JEWELRY</a>
+    <a href="/J_S25_Tienda_Online/index.php" class="brand" aria-label="LARANA JEWELRY">LARANA JEWELRY</a>
   </div>
 
   <!-- Sección derecha -->
@@ -141,8 +141,17 @@ $usuario = $_SESSION['usuario'] ?? null;
 
     <?php if ($usuario): ?>
       <div class="user-greeting">
-        <span>Hola, <?= htmlspecialchars($usuario['nombre']) ?> 👋</span>
-        <a href="/J_S25_Tienda_Online/tienda_login_php/logout.php" class="logout-link" title="Cerrar sesión">Cerrar sesión</a>
+        <!-- <span>Hola, <?= htmlspecialchars($usuario['nombre']) ?></span> -->
+        <a href="/J_S25_Tienda_Online/tienda_login_php/perfil.php" class="logout-link" title="Perfil">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+            viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-user-round-check">
+            <path d="M2 21a8 8 0 0 1 13.292-6"/>
+            <circle cx="10" cy="8" r="5"/>
+            <path d="m16 19 2 2 4-4"/>
+          </svg>
+        </a>
       </div>
     <?php else: ?>
       <a href="/J_S25_Tienda_Online/tienda_login_php/login.php" class="icon-link" title="Usuario" id="userLoginLink">
@@ -164,9 +173,9 @@ $usuario = $_SESSION['usuario'] ?? null;
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24">
         <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
       </svg>
-      <?php if ($count > 0): ?>
-        <span class="cart-count"><?= $count ?></span>
-      <?php endif; ?>
+      <span class="cart-count">
+        <?= isset($_SESSION['carrito']) ? array_sum(array_column($_SESSION['carrito'], 'cantidad')) : 0 ?>
+      </span>
     </a>
 
     <a href="#ayuda" class="help-link">¿Qué necesitas?</a>

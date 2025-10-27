@@ -1,7 +1,4 @@
 <?php
-// --- Configuración global de sesión ---
-ini_set('session.cookie_path', '/'); // hace que la cookie sea válida para todo el dominio
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

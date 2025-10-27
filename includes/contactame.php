@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header('Location: tienda_login_php/login.php');
+    header('Location: /tienda_login_php/login.php');
     exit;
 }
 
@@ -22,6 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensaje_enviado = true;
     }
 }
+
+include __DIR__ . '/header.php';
+
 ?>
 
 <!DOCTYPE html>

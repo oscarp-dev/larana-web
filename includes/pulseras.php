@@ -1,21 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header('Location: tienda_login_php/login.php');
+    header('Location: /tienda_login_php/login.php');
     exit;
 }
+
+include __DIR__ . '/header.php'; 
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Pulseras</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<?php include 'includes/header.php'; ?>
 
 <main class="container opciones">
     <h1>Pulseras</h1>
@@ -25,12 +16,12 @@ if (!isset($_SESSION['usuario'])) {
         <?php
         // Array de pulseras de ejemplo
         $pulseras = [
-            ['nombre' => 'Pulsera Minimal', 'imagen' => 'Images/placeholder.png', 'precio' => '15€'],
-            ['nombre' => 'Pulsera Elegante', 'imagen' => 'Images/placeholder.png', 'precio' => '20€'],
-            ['nombre' => 'Pulsera Colorida', 'imagen' => 'Images/placeholder.png', 'precio' => '18€'],
-            ['nombre' => 'Pulsera Clásica', 'imagen' => 'Images/placeholder.png', 'precio' => '22€'],
-            ['nombre' => 'Pulsera Moderna', 'imagen' => 'Images/placeholder.png', 'precio' => '19€'],
-            ['nombre' => 'Pulsera Vintage', 'imagen' => 'Images/placeholder.png', 'precio' => '25€']
+            ['nombre' => 'Pulsera Minimal', 'imagen' => '../images/pulsera.jpg', 'precio' => '15€'],
+            ['nombre' => 'Pulsera Elegante', 'imagen' => '../images/pulsera.jpg', 'precio' => '20€'],
+            ['nombre' => 'Pulsera Colorida', 'imagen' => '../images/pulsera.jpg', 'precio' => '18€'],
+            ['nombre' => 'Pulsera Clásica', 'imagen' => '../images/pulsera.jpg', 'precio' => '22€'],
+            ['nombre' => 'Pulsera Moderna', 'imagen' => '../images/pulsera.jpg', 'precio' => '19€'],
+            ['nombre' => 'Pulsera Vintage', 'imagen' => '../images/pulsera.jpg', 'precio' => '25€']
         ];
 
         foreach ($pulseras as $pulsera):

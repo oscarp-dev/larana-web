@@ -1,21 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header('Location: tienda_login_php/login.php');
+    header('Location: /tienda_login_php/login.php');
     exit;
 }
+
+include __DIR__ . '/header.php'; 
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Collares</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<?php include 'includes/header.php'; ?>
 
 <main class="container opciones">
     <h1>Collares</h1>
@@ -24,9 +15,9 @@ if (!isset($_SESSION['usuario'])) {
     <div class="grid-opciones">
         <?php
         $collares = [
-            ['nombre' => 'Collar Minimal', 'imagen' => 'Images/placeholder.png', 'precio' => '25€'],
-            ['nombre' => 'Collar Elegante', 'imagen' => 'Images/placeholder.png', 'precio' => '30€'],
-            ['nombre' => 'Collar Colorido', 'imagen' => 'Images/placeholder.png', 'precio' => '28€']
+            ['nombre' => 'Collar Minimal', 'imagen' => '../images/collares.jpg', 'precio' => '25€'],
+            ['nombre' => 'Collar Elegante', 'imagen' => '../images/collares.jpg', 'precio' => '30€'],
+            ['nombre' => 'Collar Colorido', 'imagen' => '../images/collares.jpg', 'precio' => '28€']
         ];
 
         foreach ($collares as $collar):

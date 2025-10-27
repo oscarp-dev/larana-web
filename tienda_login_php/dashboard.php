@@ -18,11 +18,14 @@ $usuario = $_SESSION['usuario'];
 <body>
 
     <main class="container" style="text-align:center; padding:80px 20px;">
-        <h1>Bienvenido, <span style="color:#c6a664;">
+        <h1>Muchas gracias, <span style="color:#c6a664;">
             <?= htmlspecialchars($usuario['nombre']) ?>
         </span></h1>
         <p style="margin-top:40px;">
             <a href="logout.php" style="color:#c6a664; text-decoration:none; font-weight:500;">Cerrar sesión</a>
+        </p>
+        <p style="margin-top:40px;">
+            <a href="../index.php" style="color:#c6a664; text-decoration:none; font-weight:500;">Inicio</a>
         </p>
     </main>
 

@@ -20,28 +20,31 @@
 
 /* ===== Imagen ===== */
 .producto-media {
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 1 / 1; /* Fuerza forma cuadrada */
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
   border-radius: 18px;
   overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
   padding: 30px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
 }
 
-.carousel img {
+.producto-media img {
   width: 100%;
-  max-width: 600px;
-  border-radius: 16px;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
+  border-radius: 16px;
   transition: transform 0.6s ease;
 }
 
-.carousel:hover img {
-  transform: scale(1.03);
+.producto-media:hover img {
+  transform: scale(1.05);
 }
-
 
 /* ===== Información ===== */
 .producto-info {
@@ -74,7 +77,6 @@
   margin-bottom: 1.2rem;
 }
 
-
 /* ===== Botón ===== */
 .btn-dorado {
   background: #111;
@@ -99,7 +101,7 @@
 .atributos {
   list-style: none;
   padding: 0;
-  margin: 10px 0;
+  margin: 10px 0 1rem;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -109,7 +111,6 @@
   text-transform: uppercase;
   border-bottom: 1px solid #eee;
   padding-bottom: 1rem;
-  margin-bottom: 1rem;
 }
 
 /* ===== Detalles (accordion) ===== */
@@ -131,8 +132,6 @@
   font-weight: 600;
   color: #111;
   cursor: pointer;
-  position: relative;
-  list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -188,4 +187,3 @@
     max-width: 100%;
   }
 }
-
