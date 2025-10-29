@@ -5,7 +5,7 @@ if (!isset($_SESSION['usuario'])) {
     exit;
 }
 
-include __DIR__ . '/header.php'; 
+include __DIR__ . '/../includes/header.php'; 
 ?>
 
 <main class="container opciones">
@@ -34,7 +34,7 @@ include __DIR__ . '/header.php';
     </div>
 </main>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>
 
 </body>
 </html>

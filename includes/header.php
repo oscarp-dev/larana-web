@@ -118,11 +118,11 @@ $usuario = $_SESSION['usuario'] ?? null;
 
     <!-- Menú de navegación (solo visible ≥1400px) -->
     <nav class="top-nav d-flex header-left">
-      <a href="/J_S25_Tienda_Online/includes/pulseras.php">Pulseras</a>
-      <a href="/J_S25_Tienda_Online/includes/collares.php">Collares</a>
-      <a href="/J_S25_Tienda_Online/includes/pendientes.php">Pendientes</a>
-      <a href="/J_S25_Tienda_Online/includes/anillos.php">Anillos</a>
-      <a href="/J_S25_Tienda_Online/includes/contactame.php">Contáctanos</a>
+      <a href="/J_S25_Tienda_Online/categorias/pulseras.php">Pulseras</a>
+      <a href="/J_S25_Tienda_Online/categorias/collares.php">Collares</a>
+      <a href="/J_S25_Tienda_Online/categorias/pendientes.php">Pendientes</a>
+      <a href="/J_S25_Tienda_Online/categorias/anillos.php">Anillos</a>
+      <a href="/J_S25_Tienda_Online/categorias/contactame.php">Contáctanos</a>
     </nav>
   </div>
 

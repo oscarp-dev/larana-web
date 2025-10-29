@@ -1,21 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header('Location: tienda_login_php/login.php');
+    header('Location: /tienda_login_php/login.php');
     exit;
 }
+
+include __DIR__ . '/../includes/header.php'; 
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Anillos</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<?php include 'includes/header.php'; ?>
 
 <main class="container opciones">
     <h1>Anillos</h1>
@@ -24,9 +15,9 @@ if (!isset($_SESSION['usuario'])) {
     <div class="grid-opciones">
         <?php
         $anillos = [
-            ['nombre' => 'Anillo Minimal', 'imagen' => 'Images/placeholder.png', 'precio' => '10€'],
-            ['nombre' => 'Anillo Elegante', 'imagen' => 'Images/placeholder.png', 'precio' => '15€'],
-            ['nombre' => 'Anillo Colorido', 'imagen' => 'Images/placeholder.png', 'precio' => '12€']
+            ['nombre' => 'Anillo Minimal', 'imagen' => '../images/anillos.jpg', 'precio' => '10€'],
+            ['nombre' => 'Anillo Elegante', 'imagen' => '../images/anillos.jpg', 'precio' => '15€'],
+            ['nombre' => 'Anillo Colorido', 'imagen' => '../images/anillos.jpg', 'precio' => '12€']
         ];
 
         foreach ($anillos as $anillo):
@@ -43,7 +34,5 @@ if (!isset($_SESSION['usuario'])) {
     </div>
 </main>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>
 
-</body>
-</html>

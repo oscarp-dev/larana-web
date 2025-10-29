@@ -110,19 +110,19 @@ $usuario = $_SESSION['usuario'] ?? null;
   <section id="categorias" class="categorias container">
     <h2>Categorías</h2>
     <div class="grid-categorias">
-      <a class="categoria" href="#productos">
+      <a class="categoria" href="categorias/pendientes.php">
         <div class="cat-media"><img src="images/pendientes.jpg" alt="Pendientes"></div>
         <p>Pendientes</p>
       </a>
-      <a class="categoria" href="#productos">
+      <a class="categoria" href="categorias/collares.php">
         <div class="cat-media"><img src="images/collares.jpg" alt="Collares"></div>
         <p>Collares</p>
       </a>
-      <a class="categoria" href="#productos">
+      <a class="categoria" href="categorias/pulseras.php">
         <div class="cat-media"><img src="images/pulsera.jpg" alt="Pulseras"></div>
         <p>Pulseras</p>
       </a>
-      <a class="categoria" href="#productos">
+      <a class="categoria" href="categorias/anillos.php">
         <div class="cat-media"><img src="images/anillos.jpg" alt="Anillos"></div>
         <p>Anillos</p>
       </a>
@@ -133,11 +133,11 @@ $usuario = $_SESSION['usuario'] ?? null;
   <section id="opciones" class="opciones container">
     <h2>Explora nuestras secciones</h2>
     <div class="grid-opciones">
-      <a class="btn-opcion" href="includes/pulseras.php">Pulseras</a>
-      <a class="btn-opcion" href="includes/collares.php">Collares</a>
-      <a class="btn-opcion" href="includes/pendientes.php">Pendientes</a>
-      <a class="btn-opcion" href="includes/anillos.php">Anillos</a>
-      <a class="btn-opcion" href="includes/contactame.php">Contáctame</a>
+      <a class="btn-opcion" href="categorias/pulseras.php">Pulseras</a>
+      <a class="btn-opcion" href="categorias/collares.php">Collares</a>
+      <a class="btn-opcion" href="categorias/pendientes.php">Pendientes</a>
+      <a class="btn-opcion" href="categorias/anillos.php">Anillos</a>
+      <a class="btn-opcion" href="categorias/contactame.php">Contáctanos</a>
     </div>
   </section>
 

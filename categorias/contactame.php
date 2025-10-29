@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-include __DIR__ . '/header.php';
+include __DIR__ . '/../includes/header.php'; 
 
 ?>
 
@@ -105,11 +105,10 @@ include __DIR__ . '/header.php';
 </head>
 <body>
 
-<?php include 'includes/header.php'; ?>
 
 <main class="container opciones">
     <div class="contacto-container">
-        <h1>Contáctame</h1>
+        <h1>Contáctanos</h1>
         <p>Si tienes dudas o quieres hacer un pedido, escríbenos usando el siguiente formulario.</p>
 
         <?php if ($mensaje_enviado): ?>
@@ -133,7 +132,7 @@ include __DIR__ . '/header.php';
     </div>
 </main>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>
 
 </body>
 </html>
