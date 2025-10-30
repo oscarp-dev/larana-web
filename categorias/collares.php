@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header('Location: /tienda_login_php/login.php');
+    header('Location: ../tienda_login_php/login.php');
     exit;
 }
 
@@ -14,10 +14,11 @@ include __DIR__ . '/../includes/header.php';
 
     <div class="grid-opciones">
         <?php
+        // Array de collares de ejemplo
         $collares = [
-            ['nombre' => 'Collar Minimal', 'imagen' => '../images/collares.jpg', 'precio' => '25€'],
-            ['nombre' => 'Collar Elegante', 'imagen' => '../images/collares.jpg', 'precio' => '30€'],
-            ['nombre' => 'Collar Colorido', 'imagen' => '../images/collares.jpg', 'precio' => '28€']
+            ['id' => 1, 'nombre' => 'Collar Minimal', 'imagen' => '../images/collares.jpg', 'precio' => '25€'],
+            ['id' => 2, 'nombre' => 'Collar Elegante', 'imagen' => '../images/collares.jpg', 'precio' => '30€'],
+            ['id' => 3, 'nombre' => 'Collar Colorido', 'imagen' => '../images/collares.jpg', 'precio' => '28€']
         ];
 
         foreach ($collares as $collar):
@@ -28,13 +29,10 @@ include __DIR__ . '/../includes/header.php';
                 </div>
                 <h3><?= htmlspecialchars($collar['nombre']) ?></h3>
                 <span class="precio"><?= $collar['precio'] ?></span>
-                <button class="btn-line">Ver detalle</button>
+                <a href="../productos/producto.php?id=<?= $collar['id'] ?>" class="btn-line">Ver detalle</a>
             </div>
         <?php endforeach; ?>
     </div>
 </main>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
-
-</body>
-</html>

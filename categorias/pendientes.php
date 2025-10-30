@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header('Location: /tienda_login_php/login.php');
+    header('Location: ../tienda_login_php/login.php');
     exit;
 }
 
@@ -14,10 +14,11 @@ include __DIR__ . '/../includes/header.php';
 
     <div class="grid-opciones">
         <?php
+        // Array de pendientes con IDs
         $pendientes = [
-            ['nombre' => 'Pendiente Minimal', 'imagen' => '../images/pendientes.jpg', 'precio' => '18€'],
-            ['nombre' => 'Pendiente Elegante', 'imagen' => '../images/pendientes.jpg', 'precio' => '22€'],
-            ['nombre' => 'Pendiente Colorido', 'imagen' => '../images/pendientes.jpg', 'precio' => '20€']
+            ['id' => 1, 'nombre' => 'Pendiente Minimal', 'imagen' => '../images/pendientes.jpg', 'precio' => '18€'],
+            ['id' => 2, 'nombre' => 'Pendiente Elegante', 'imagen' => '../images/pendientes.jpg', 'precio' => '22€'],
+            ['id' => 3, 'nombre' => 'Pendiente Colorido', 'imagen' => '../images/pendientes.jpg', 'precio' => '20€']
         ];
 
         foreach ($pendientes as $pendiente):
@@ -28,13 +29,10 @@ include __DIR__ . '/../includes/header.php';
                 </div>
                 <h3><?= htmlspecialchars($pendiente['nombre']) ?></h3>
                 <span class="precio"><?= $pendiente['precio'] ?></span>
-                <button class="btn-line">Ver detalle</button>
+                <a href="../productos/producto.php?id=<?= $pendiente['id'] ?>" class="btn-line">Ver detalle</a>
             </div>
         <?php endforeach; ?>
     </div>
 </main>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
-
-</body>
-</html>

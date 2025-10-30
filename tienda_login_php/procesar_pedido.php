@@ -33,11 +33,11 @@ try {
     // Iniciar transacción
     $conn->beginTransaction();
 
-    // 1️⃣ Insertar pedido
-    $sqlPedido = "INSERT INTO pedidos (usuario_id, total, estado) VALUES (:usuario_id, :total, 'pendiente')";
+    // 1️⃣ Insertar pedido (columna corregida: id_usuario)
+    $sqlPedido = "INSERT INTO pedidos (id_usuario, total, estado) VALUES (:id_usuario, :total, 'pendiente')";
     $stmtPedido = $conn->prepare($sqlPedido);
     $stmtPedido->execute([
-        ':usuario_id' => $user_id,
+        ':id_usuario' => $user_id,
         ':total' => $total
     ]);
 
@@ -77,3 +77,4 @@ try {
     exit;
 }
 ?>
+

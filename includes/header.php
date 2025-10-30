@@ -16,17 +16,16 @@ $usuario = $_SESSION['usuario'] ?? null;
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Estilos globales -->
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="/style.css">
 
   <!-- Estilos de producto (solo si estás en la carpeta productos) -->
   <?php 
   $rutaActual = $_SERVER['PHP_SELF'];
   if (strpos($rutaActual, '/productos/') !== false): ?>
-    <link rel="stylesheet" href="../productos/producto.css">
+    <link rel="stylesheet" href="/productos/producto.css">
   <?php endif; ?>
 
   <style>
-    /* Estructura base */
     /* Estructura base */
     .main-header {
       display: flex;
@@ -54,14 +53,14 @@ $usuario = $_SESSION['usuario'] ?? null;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap: clamp(8px, 2vw, 18px);     /* espacio adaptable */
+      gap: clamp(8px, 2vw, 18px);
       flex-wrap: nowrap;
     }
     .top-nav a {
       text-decoration: none;
       color: #111;
       font-weight: 500;
-      font-size: clamp(0.8rem, 1.2vw, 1rem); /* tamaño de texto adaptable */
+      font-size: clamp(0.8rem, 1.2vw, 1rem);
       white-space: nowrap;
     }
 
@@ -84,51 +83,39 @@ $usuario = $_SESSION['usuario'] ?? null;
       font-size: clamp(0.85rem, 1vw, 1rem);
     }
 
-    /* 🔥 Breakpoints personalizados */
+    /* Breakpoints personalizados */
     @media (max-width: 1399px) {
-      .top-nav {
-        display: none !important;     /* Oculta menú completo */
-      }
-      .menu-btn {
-        display: inline-flex !important; /* Muestra hamburguesa */
-      }
-      .help-link {
-        display: none !important;     /* Oculta "¿Qué necesitas?" */
-      }
+      .top-nav { display: none !important; }
+      .menu-btn { display: inline-flex !important; }
+      .help-link { display: none !important; }
     }
-
     @media (min-width: 1400px) {
-      .menu-btn {
-        display: none !important;     /* Oculta hamburguesa en pantallas grandes */
-      }
+      .menu-btn { display: none !important; }
     }
-
   </style>
 </head>
-  
+
 <header class="main-header container-fluid">
   <!-- Sección izquierda -->
   <div class="header-section header-left">
-    <!-- 🔧 Botón hamburguesa visible solo <1400px -->
     <button class="btn btn-outline-dark menu-btn me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu" aria-label="Menú">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
     </button>
 
-    <!-- Menú de navegación (solo visible ≥1400px) -->
     <nav class="top-nav d-flex header-left">
-      <a href="/J_S25_Tienda_Online/categorias/pulseras.php">Pulseras</a>
-      <a href="/J_S25_Tienda_Online/categorias/collares.php">Collares</a>
-      <a href="/J_S25_Tienda_Online/categorias/pendientes.php">Pendientes</a>
-      <a href="/J_S25_Tienda_Online/categorias/anillos.php">Anillos</a>
-      <a href="/J_S25_Tienda_Online/categorias/contactame.php">Contáctanos</a>
+      <a href="/categorias/pulseras.php">Pulseras</a>
+      <a href="/categorias/collares.php">Collares</a>
+      <a href="/categorias/pendientes.php">Pendientes</a>
+      <a href="/categorias/anillos.php">Anillos</a>
+      <a href="/categorias/contactame.php">Contáctanos</a>
     </nav>
   </div>
 
   <!-- Sección centro -->
   <div class="header-section header-center">
-    <a href="/J_S25_Tienda_Online/index.php" class="brand" aria-label="LARANA JEWELRY">LARANA JEWELRY</a>
+    <a href="/index.php" class="brand" aria-label="LARANA JEWELRY">LARANA JEWELRY</a>
   </div>
 
   <!-- Sección derecha -->
@@ -141,8 +128,7 @@ $usuario = $_SESSION['usuario'] ?? null;
 
     <?php if ($usuario): ?>
       <div class="user-greeting">
-        <!-- <span>Hola, <?= htmlspecialchars($usuario['nombre']) ?></span> -->
-        <a href="/J_S25_Tienda_Online/tienda_login_php/perfil.php" class="logout-link" title="Perfil">
+        <a href="../tienda_login_php/perfil.php" class="logout-link" title="Perfil">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
             viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5"
             stroke-linecap="round" stroke-linejoin="round"
@@ -154,7 +140,7 @@ $usuario = $_SESSION['usuario'] ?? null;
         </a>
       </div>
     <?php else: ?>
-      <a href="/J_S25_Tienda_Online/tienda_login_php/login.php" class="icon-link" title="Usuario" id="userLoginLink">
+      <a href="../tienda_login_php/login.php" class="icon-link" title="Usuario" id="userLoginLink">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24">
           <circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 14 0v1"/>
         </svg>
@@ -169,7 +155,7 @@ $usuario = $_SESSION['usuario'] ?? null;
         }
       }
     ?>
-    <a href="/J_S25_Tienda_Online/tienda_login_php/carrito.php" class="icon-link" title="Carrito" aria-label="Carrito">
+    <a href="../tienda_login_php/carrito.php" class="icon-link" title="Carrito" aria-label="Carrito">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24">
         <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
       </svg>
@@ -190,11 +176,11 @@ $usuario = $_SESSION['usuario'] ?? null;
   </div>
   <div class="offcanvas-body">
     <nav class="d-flex flex-column">
-      <a href="pulseras.php" class="mb-2">Pulseras</a>
-      <a href="collares.php" class="mb-2">Collares</a>
-      <a href="brazaletes.php" class="mb-2">Brazaletes</a>
-      <a href="anillos.php" class="mb-2">Anillos</a>
-      <a href="contactame.php" class="mb-2">Contáctanos</a>
+      <a href="/categorias/pulseras.php" class="mb-2">Pulseras</a>
+      <a href="/categorias/collares.php" class="mb-2">Collares</a>
+      <a href="/categorias/brazaletes.php" class="mb-2">Brazaletes</a>
+      <a href="/categorias/anillos.php" class="mb-2">Anillos</a>
+      <a href="/categorias/contactame.php" class="mb-2">Contáctanos</a>
     </nav>
   </div>
 </div>

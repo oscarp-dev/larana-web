@@ -1,8 +1,15 @@
 <?php
+// 🔹 Mostrar todos los errores para depuración
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// 🔹 Iniciar sesión si no está iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// 🔹 Conectar con la base de datos (ruta relativa correcta)
 require_once "db_connect.php";
 
 $errors = [];
@@ -12,7 +19,7 @@ $password = trim($_POST['password'] ?? '');
 // ✅ Guardar la última página visitada (si no estamos en login o register)
 if (!isset($_SESSION['ultima_pagina']) && isset($_SERVER['HTTP_REFERER'])) {
     $referer = $_SERVER['HTTP_REFERER'];
-    if (strpos($referer, 'login.php') === false && strpos($referer, 'registrer.php') === false) {
+    if (strpos($referer, 'login.php') === false && strpos($referer, 'register.php') === false) {
         $_SESSION['ultima_pagina'] = $referer;
     }
 }
@@ -36,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 🧠 PROCESAR LOGIN
     // ============================
     if (empty($errors)) {
+        // 🔹 Preparar y ejecutar consulta segura
         $stmt = $conn->prepare("SELECT id, password, nombre, apellido, email, admin FROM usuarios WHERE email = :email");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -59,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             // 🔁 Si no hay página anterior, ir al inicio
-            header("Location: /J_S25_Tienda_Online/index.php");
+            header("Location: ../index.php"); // subimos un nivel si accedemos desde /categorias/
             exit;
         } else {
             $errors[] = "❌ Email o contraseña incorrectos.";
@@ -98,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     <?php endif; ?>
 
-    <form method="post" action="/J_S25_Tienda_Online/tienda_login_php/login.php" novalidate>
+    <form method="post" action="login.php" novalidate>
       <label for="email">Email</label>
       <input id="email" name="email" type="email"
              value="<?= htmlspecialchars($email) ?>"
