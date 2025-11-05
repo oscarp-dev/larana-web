@@ -187,3 +187,240 @@
     max-width: 100%;
   }
 }
+/* Sección de reseñas  */
+
+.reviews {
+  max-width: 1100px;
+  margin: 80px auto 100px; 
+  padding: 60px 50px 70px; 
+  background: linear-gradient(180deg, #ffffff 0%, #faf9f7 100%);
+  border-radius: 24px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Línea dorada decorativa --- */
+.reviews::before {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: #d1b464;
+  border-radius: 3px;
+  margin: 0 auto 18px;
+}
+
+/* --- Título principal --- */
+.reviews h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  color: #bfa25f;
+  margin-bottom: 18px; 
+  letter-spacing: 0.6px;
+}
+
+/* --- Resumen de valoraciones --- */
+.rating-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 30px; 
+}
+
+.rating-summary i.fa-star,
+.rating-summary i.fa-gem {
+  color: #d1b464;
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 4px rgba(209, 180, 100, 0.25));
+  margin-right: 4px;
+}
+
+.rating-summary strong {
+  color: #111;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.rating-summary span {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* --- Lista de reseñas --- */
+.reviews-list {
+  max-width: 650px; 
+  margin: 0 auto 70px; 
+}
+
+/* --- Reseña individual --- */
+.review {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 26px 30px; 
+  margin-bottom: 24px; 
+  transition: transform 0.1s ease, box-shadow 0.2s ease, border-left 0.2s ease;
+  border-left: 4px solid transparent;
+}
+
+.review:hover {
+  transform: translateY(-2px);
+  border-left: 4px solid #d1b464;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.review-header strong {
+  color: #111;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.review-header small {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.review .stars {
+  color: #d1b464;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin: 6px 0;
+}
+
+.review p {
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: 6px;
+}
+
+/* --- Formulario de reseñas --- */
+.review-form {
+  max-width: 650px; 
+  margin: 60px auto 0;
+  padding: 40px 45px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.review-form h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  color: #bfa25f;
+  margin-bottom: 22px;
+}
+
+.review-form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px 15px;
+  font-size: 0.95rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 15px;
+}
+
+.review-form input:focus,
+.review-form select:focus,
+.review-form textarea:focus {
+  outline: none;
+  border-color: #c8aa6e;
+  background-color: #fff;
+  box-shadow: 0 0 6px rgba(200, 170, 110, 0.25);
+}
+
+.review-form textarea {
+  resize: none;
+}
+
+/* --- Botón principal --- */
+.review-form .btn-dorado {
+  width: 100%;
+  background-color: #d1b464;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.25s ease, transform 0.1s ease;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+}
+
+.review-form .btn-dorado:hover {
+  background-color: #c5a74e;
+}
+
+.review-form .btn-dorado:active {
+  transform: scale(0.98);
+}
+
+/* --- Mensajes de estado --- */
+#reviewMsg {
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+/* --- Texto de "sin reseñas" --- */
+.reviews p {
+  text-align: center;
+  color: #777;
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+/* --- Estrellas interactivas (formulario) --- */
+.star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1.6rem;
+  color: #ccc;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.star-rating .fa-star {
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.star-rating .fa-star:hover {
+  transform: scale(1.15);
+}
+
+.star-rating .fa-star.active,
+.star-rating .fa-star.hovered {
+  color: #d1b464; 
+}
+
+

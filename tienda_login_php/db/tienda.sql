@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1deb1+deb12u1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 05-11-2025 a las 08:44:28
--- Versión del servidor: 10.11.14-MariaDB-0+deb12u2
--- Versión de PHP: 8.2.29
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 05-11-2025 a las 18:07:39
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -55,7 +55,9 @@ INSERT INTO `detalle_pedidos` (`id`, `pedido_id`, `producto_id`, `cantidad`, `pr
 (14, 14, 4, 1, 110.00),
 (15, 14, 2, 1, 150.00),
 (16, 14, 3, 1, 90.00),
-(17, 15, 1, 1, 120.00);
+(17, 15, 1, 1, 120.00),
+(18, 16, 3, 1, 90.00),
+(19, 16, 2, 1, 150.00);
 
 -- --------------------------------------------------------
 
@@ -85,7 +87,8 @@ INSERT INTO `pedidos` (`id`, `usuario_id`, `fecha`, `total`, `estado`) VALUES
 (12, 2, '2025-10-26 22:25:38', 360.00, 'pendiente'),
 (13, 3, '2025-10-27 09:25:43', 90.00, 'pendiente'),
 (14, 2, '2025-10-27 14:27:22', 350.00, 'pendiente'),
-(15, 4, '2025-10-29 09:32:11', 120.00, 'pendiente');
+(15, 4, '2025-10-29 09:32:11', 120.00, 'pendiente'),
+(16, 5, '2025-11-05 17:10:36', 240.00, 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -118,6 +121,21 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `imag
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `stars` int(11) NOT NULL,
+  `text` text NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -141,7 +159,8 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `password`, `telefono`, `direccion`, `acepta_terminos`, `fecha_registro`, `admin`) VALUES
 (2, 'Santiago', 'Enfedaque', 'sanenfcor@gmail.com', '$2y$10$HQqqu0gzpXnweprQocscnuZyO5zz.IVMBaAtDjdkhW1A0KE23nmS.', '644464952', 'Cuarteles 37', 1, '2025-10-21 17:22:21', 1),
 (3, 'Alejandro', 'Brito', 'prueba@gmail.com', '$2y$10$q2NJFXHBG7s/WiK5el4yXuHfE6Yz2m1FzVjRL16oZUHxHBY7PbSI6', '666666666', 'Atapuerca', 1, '2025-10-27 00:48:32', 0),
-(4, 'Javier', 'Carreño', 'prueba2@gmail.com', '$2y$10$6oaG9fRy1xmnkA9LuAr/r.RiiFb92Qrx904gKO.2VyUsJ5.w.3ro6', '555555555', 'Acapulco', 1, '2025-10-27 00:52:01', 0);
+(4, 'Javier', 'Carreño', 'prueba2@gmail.com', '$2y$10$6oaG9fRy1xmnkA9LuAr/r.RiiFb92Qrx904gKO.2VyUsJ5.w.3ro6', '555555555', 'Acapulco', 1, '2025-10-27 00:52:01', 0),
+(5, 'Oscar Daniel', 'Perez Colina', 'osdapeco@gmail.com', '$2y$10$lnIUSuIxBPVLFl5HLDYfHuWJJsRaZoGHhnpsMxqkEmxTiF/1JxFT2', '682811737', 'Calle carlota pasaron 10 2do puerta 4', 1, '2025-11-05 16:10:06', 0);
 
 --
 -- Índices para tablas volcadas
@@ -169,6 +188,13 @@ ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -183,25 +209,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `detalle_pedidos`
 --
 ALTER TABLE `detalle_pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT de la tabla `reviews`
+--
+ALTER TABLE `reviews`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
@@ -219,6 +251,12 @@ ALTER TABLE `detalle_pedidos`
 --
 ALTER TABLE `pedidos`
   ADD CONSTRAINT `fk_pedidos_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `fk_reviews_producto` FOREIGN KEY (`product_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
