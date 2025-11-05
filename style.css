@@ -517,3 +517,163 @@ a.btn-line:visited {
     color: #ffd700;
     box-shadow: 0 6px 14px rgba(0,0,0,0.6);
 }
+
+
+
+
+.perfil-info{
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid var(--borde);
+  text-align: center;
+}
+.Titulo_Usu{
+  margin-bottom: 50px;
+}
+.Info_Usu{
+  margin-left: 50px;
+  text-align: left;
+  margin-bottom: 60px;
+}
+.Boton_Sesion{
+  max-width: 600px;
+  padding: 12px;
+  background: #c6a664;
+  border-radius: 12px;
+  border: 2px solid var(--borde);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.Boton_Sesion:hover{
+  background: #b38f53;
+  border-color: #866a3a62;
+}
+
+
+.perfil-historial{
+  margin-top: 80px;
+  padding: 40px 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid var(--borde);
+  text-align: center;
+}
+.Titutlo_Pedidos{
+  margin-bottom: 50px;
+}
+
+
+.perfil-admin{
+  margin-top: 20px;
+  padding: 40px;
+  background: #fff;
+  text-align: center;
+}
+.Titulo_Registrados{
+  margin-bottom: 40px;
+}
+/* --- 1. ESTILO ESPECÍFICO DEL TÍTULO --- */
+.titulo-usuarios {
+    text-align: center;
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%; /* Asegura que no ocupe todo el ancho */
+}
+
+/* --- 2. ESTILO ESPECÍFICO DE LA TABLA COMPLETA --- */
+.lista-usuarios-admin {
+    width: 90%; 
+    margin: 20px auto; /* Centrar la tabla */
+    border-collapse: collapse; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    background-color: #ffffff; 
+    border-radius: 8px; 
+    overflow: hidden; 
+}
+
+/* Estilo para el encabezado (<thead>) de esta tabla */
+.lista-usuarios-admin th {
+    background-color: #c6a664; 
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Estilo para las celdas (<td>) de esta tabla */
+.lista-usuarios-admin td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd; 
+}
+
+/* Efecto de cebra en filas pares */
+.lista-usuarios-admin tbody tr:nth-child(even) {
+    background-color: #f9f9f9; 
+}
+
+/* Efecto hover */
+.lista-usuarios-admin tbody tr:hover {
+    background-color: #e6f7ff; 
+}
+
+/* Estilo para los enlaces de ACCIÓN DENTRO DE ESTA TABLA */
+.lista-usuarios-admin .enlace-accion {
+    color: #000;
+    text-decoration: none; 
+    margin-right: 10px;
+    transition: color 0.3s ease; 
+}
+
+.lista-usuarios-admin .enlace-accion:hover {
+    color: #0056b3; 
+    text-decoration: underline; 
+}
+
+/* Estilo para el mensaje de error */
+.error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+}
+
+/* --- 3. ESTILO ESPECÍFICO DEL BOTÓN --- */
+
+/* Centramos el contenido dentro de esta sección */
+.seccion-acciones-admin p {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+/* Estilo para el botón (clase única: .btn-agregar-producto) */
+.btn-agregar-producto {
+    display: inline-block; 
+    padding: 10px 20px;
+    background-color: #b8860b; 
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.btn-agregar-producto:hover {
+    background-color: #c6a664; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
