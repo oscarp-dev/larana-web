@@ -251,6 +251,25 @@ body {
   display:grid; grid-template-columns:repeat(4,1fr); gap:36px;
 }
 
+/* Responsivo */
+@media (max-width: 1200px) {
+  .grid-productos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .grid-productos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-productos {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 .producto{
   border:1px solid var(--borde); border-radius:12px; background:#fff;
   box-shadow:0 3px 10px rgba(0,0,0,.05); padding:16px 16px 18px;
@@ -469,3 +488,32 @@ a.btn-line:visited {
   }
 }
 
+.btn-gold {
+    background: linear-gradient(135deg, #d4af37, #b8860b);
+    border: none;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(212,175,55,0.5);
+    transition: 0.2s;
+}
+
+.btn-gold:hover {
+    background: linear-gradient(135deg, #b8860b, #8b7500);
+    color: white;
+    box-shadow: 0 6px 14px rgba(212,175,55,0.6);
+}
+
+.btn-dark-elegant {
+    background: linear-gradient(135deg, #1c1c1c, #000);
+    border: none;
+    color: #f1c40f;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: 0.2s;
+}
+
+.btn-dark-elegant:hover {
+    background: linear-gradient(135deg, #000, #1c1c1c);
+    color: #ffd700;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.6);
+}

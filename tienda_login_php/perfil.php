@@ -16,71 +16,62 @@ $usuario = $_SESSION['usuario'];
 include __DIR__ . '/../includes/header.php';
 ?>
 
-<main class="container">
+<main>
     <!-- SECCIÓN 1: Información básica -->
-    <section class="perfil-info" style="margin-bottom:50px;">
-        <h2 style="margin-bottom:24px; font-size:2rem;">Información de usuario</h2>
-        <div class="info-box" style="padding:20px; border:1px solid var(--borde); border-radius:12px; background:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.05); max-width:500px;">
-            <p><strong>Nombre:</strong> <?= htmlspecialchars($usuario['nombre']) ?></p>
-            <p><strong>Email:</strong> <?= htmlspecialchars($usuario['email']) ?></p>
-            <p><strong>Registrado el:</strong>
-                <?php 
-                    try {
-                        $sql = "SELECT fecha_registro FROM usuarios WHERE id = :id";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->execute([':id' => $usuario['id']]);
-                        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    <section class="perfil-info">
+        <h2>Información de usuario</h2>
+        <p><strong>Nombre:</strong> <?= htmlspecialchars($usuario['nombre']) ?></p>
+        <p><strong>Email:</strong> <?= htmlspecialchars($usuario['email']) ?></p>
+        <p><strong>Registrado el:</strong>
+            <?php 
+                try {
+                    $sql = "SELECT fecha_registro FROM usuarios WHERE id = :id";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute([':id' => $usuario['id']]);
+                    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                        if ($resultado) {
-                            echo htmlspecialchars($resultado['fecha_registro']);
-                        } else {
-                            echo "No disponible";
-                        }
-                    } catch (PDOException $e) {
-                        echo "<span style='color:red;'>Error: " . htmlspecialchars($e->getMessage()) . "</span>";
+                    if ($resultado) {
+                        echo htmlspecialchars($resultado['fecha_registro']) . "</p>";
+                    } else {
+                        echo "No disponible";
                     }
-                ?>
-            </p>
-            <p style="margin-top:15px;">
-                <a href="logout.php" class="btn-line">Cerrar sesión</a>
-            </p>
-        </div>
-    </section>
-
-    <!-- SECCIÓN 2: Historial de pedidos estilo cards -->
-    <section class="perfil-historial" style="margin-bottom:50px;">
-        <h2 style="margin-bottom:24px; font-size:2rem;">Historial de pedidos</h2>
-        <div class="grid-productos" style="gap:20px;">
-            <?php
-            try {
-                $sql = "SELECT id, total, fecha FROM pedidos WHERE usuario_id = :usuario_id ORDER BY fecha";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute([':usuario_id' => $usuario['id']]);
-                $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                if ($pedidos) {
-                    foreach ($pedidos as $pedido) {
-                        echo "<div class='producto' style='padding:16px;'>";
-                        echo "<h3>Pedido #{$pedido['id']}</h3>";
-                        echo "<p><strong>Total:</strong> {$pedido['total']} €</p>";
-                        echo "<p><strong>Fecha:</strong> {$pedido['fecha']}</p>";
-                        echo "</div>";
-                    }
-                } else {
-                    echo "<p>No has realizado ningún pedido.</p>";
+                } catch (PDOException $e) {
+                    echo "<p style='color:red;'>Error al obtener la fecha: " . htmlspecialchars($e->getMessage()) . "</p>";
                 }
-            } catch (PDOException $e) {
-                echo "<span style='color:red;'>Error: " . htmlspecialchars($e->getMessage()) . "</span>";
-            }
             ?>
-        </div>
+        </p>
+        <p>
+            <a href="/J_S25_Tienda_Online/tienda_login_php/logout.php">Cerrar sesión</a>
+        </p>
     </section>
 
-    <!-- SECCIÓN 3: Administración (solo admin) estilo cards -->
-    <?php if (!empty($usuario['admin']) && $usuario['admin'] == 1): ?>
-    <section class="perfil-admin">
-        <h2 style="margin-bottom:24px; font-size:2rem;">Usuarios registrados</h2>
-        <div class="grid-productos" style="gap:20px;">
+    <!-- SECCIÓN 2: Historial de pedidos -->
+    <section class="perfil-historial">
+        <h2>Historial de pedidos</h2>
+        <?php
+        try {
+            $sql = "SELECT id, total, fecha FROM pedidos WHERE usuario_id = :usuario_id ORDER BY fecha";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([':usuario_id' => $usuario['id']]);
+            $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if ($pedidos) {
+                echo "<ol>";
+                foreach ($pedidos as $pedido) {
+                    echo "<li>Pedido #{$pedido['id']} — Total: {$pedido['total']} € — Fecha: {$pedido['fecha']}</li>";
+                }
+                echo "</ol>";
+            } else {
+                echo "<p>No has realizado ningún pedido.</p>";
+            }
+        } catch (PDOException $e) {
+            echo "<p style='color:red;'>Error al cargar historial: " . htmlspecialchars($e->getMessage()) . "</p>";
+        }
+        ?>
+    </section>
+    <?php if ($usuario['admin'] == 1): ?>
+        <section class="perfil-admin">
+            <h2>Lista de usuarios registrados</h2>
             <?php
             try {
                 $sql = "SELECT id, nombre, email, admin, fecha_registro FROM usuarios";
@@ -89,26 +80,31 @@ include __DIR__ . '/../includes/header.php';
                 $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 if ($usuarios) {
+                    echo "<table border='1' cellpadding='8'>";
+                    echo "<tr><th>ID</th><th>Nombre</th><th>Email</th><th>Admin</th><th>Fecha de registro</th></tr>";
                     foreach ($usuarios as $u) {
-                        echo "<div class='producto' style='padding:16px;'>";
-                        echo "<h3>" . htmlspecialchars($u['nombre']) . "</h3>";
-                        echo "<p><strong>Email:</strong> " . htmlspecialchars($u['email']) . "</p>";
-                        echo "<p><strong>Admin:</strong> " . ($u['admin'] ? 'Sí' : 'No') . "</p>";
-                        echo "<p><strong>Registro:</strong> {$u['fecha_registro']}</p>";
-                        echo "<div style='margin-top:10px; display:flex; gap:8px;'>";
-                        echo "<a href='modificar_usuarios.php?id={$u['id']}' class='btn-line'>Editar</a>";
-                        echo "<a href='ver_historial.php?id={$u['id']}' class='btn-line'>Historial</a>";
-                        echo "</div>";
-                        echo "</div>";
+                        echo "<tr>";
+                        echo "<td>{$u['id']}</td>";
+                        echo "<td>" . htmlspecialchars($u['nombre']) . "</td>";
+                        echo "<td>" . htmlspecialchars($u['email']) . "</td>";
+                        echo "<td>" . ($u['admin'] ? 'TRUE' : 'FALSE') . "</td>";
+                        echo "<td>{$u['fecha_registro']}</td>";
+                        echo "<td><a href='/J_S25_Tienda_Online/tienda_login_php/modificar_usuarios.php?id={$u['id']}'>Editar</a></td>";
+                        echo "<td><a href='/J_S25_Tienda_Online/tienda_login_php/ver_historial.php?id={$u['id']}'>Historial de compra</a></td>";
+                        echo "</tr>";
                     }
+                    echo "</table>";
                 }
             } catch (PDOException $e) {
-                echo "<span style='color:red;'>Error: " . htmlspecialchars($e->getMessage()) . "</span>";
+                echo "<p style='color:red;'>Error al obtener usuarios: " . htmlspecialchars($e->getMessage()) . "</p>";
             }
             ?>
-        </div>
-    </section>
+        </section>
+        <section>
+            <p>
+                <a href="/J_S25_Tienda_Online/tienda_login_php/aniadir_producto.php">Añadir producto</a>
+            </p>
+        </section>
     <?php endif; ?>
 </main>
-
 <?php include __DIR__ . '/../includes/footer.php'; ?>

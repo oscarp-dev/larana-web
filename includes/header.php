@@ -16,16 +16,24 @@ $usuario = $_SESSION['usuario'] ?? null;
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Estilos globales -->
-  <link rel="stylesheet" href="/style.css">
-
-  <!-- Estilos de producto (solo si estás en la carpeta productos) -->
+  <link rel="stylesheet" href="/J_S25_Tienda_Online/style.css">
+  
+  <!--  Si esta en la carpeta productos  -->
   <?php 
   $rutaActual = $_SERVER['PHP_SELF'];
   if (strpos($rutaActual, '/productos/') !== false): ?>
-    <link rel="stylesheet" href="/productos/producto.css">
+    <link rel="stylesheet" href="../productos/producto.css">
+  <?php endif; ?>
+
+  <!--  Si esta en la carpeta tienda_login_php  -->
+  <?php 
+  $rutaActual = $_SERVER['PHP_SELF'];
+  if (strpos($rutaActual, '/tienda_login_php/') !== false): ?>
+    <link rel="stylesheet" href="/tienda_login_php/styles.css">
   <?php endif; ?>
 
   <style>
+    /* Estructura base */
     /* Estructura base */
     .main-header {
       display: flex;
@@ -53,14 +61,14 @@ $usuario = $_SESSION['usuario'] ?? null;
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap: clamp(8px, 2vw, 18px);
+      gap: clamp(8px, 2vw, 18px);     /* espacio adaptable */
       flex-wrap: nowrap;
     }
     .top-nav a {
       text-decoration: none;
       color: #111;
       font-weight: 500;
-      font-size: clamp(0.8rem, 1.2vw, 1rem);
+      font-size: clamp(0.8rem, 1.2vw, 1rem); /* tamaño de texto adaptable */
       white-space: nowrap;
     }
 
@@ -83,39 +91,97 @@ $usuario = $_SESSION['usuario'] ?? null;
       font-size: clamp(0.85rem, 1vw, 1rem);
     }
 
-    /* Breakpoints personalizados */
+    /* 🔥 Breakpoints personalizados */
     @media (max-width: 1399px) {
-      .top-nav { display: none !important; }
-      .menu-btn { display: inline-flex !important; }
-      .help-link { display: none !important; }
+      .top-nav {
+        display: none !important;     /* Oculta menú completo */
+      }
+      .menu-btn {
+        display: inline-flex !important; /* Muestra hamburguesa */
+      }
+      .help-link {
+        display: none !important;     /* Oculta "¿Qué necesitas?" */
+      }
     }
+
     @media (min-width: 1400px) {
-      .menu-btn { display: none !important; }
+      .menu-btn {
+        display: none !important;     /* Oculta hamburguesa en pantallas grandes */
+      }
+    }
+
+    /* Botón dorado elegante */
+    .btn-gold {
+        background: linear-gradient(135deg, #d4af37, #b8860b);
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        transition: transform .2s, box-shadow .2s;
+    }
+    .btn-gold:hover {
+        background: linear-gradient(135deg, #e8c547, #c89b14);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+    }
+
+    /* Botón oscuro elegante */
+    .btn-dark-elegant {
+        background: #1a1a1a;
+        border: 1px solid #444;
+        color: #f1f1f1;
+        font-weight: bold;
+        transition: transform .2s, box-shadow .2s;
+    }
+    .btn-dark-elegant:hover {
+        background: #000;
+        border-color: #666;
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, .3);
+    }
+
+    /* Text color gold */
+    .text-gold {
+        color: #b38f53 !important;
+    }
+
+    /* Card header oscuro elegante */
+    .card-header-dark-elegant {
+        background: #1a1a1a;
+        border-bottom: 1px solid #444;
+        color: #b38f53; /* Letras doradas */
+        font-weight: bold;
+    }
+    .card-header-dark-elegant h3 {
+        margin: 0;
     }
   </style>
 </head>
-
+  
 <header class="main-header container-fluid">
   <!-- Sección izquierda -->
   <div class="header-section header-left">
+    <!-- 🔧 Botón hamburguesa visible solo <1400px -->
     <button class="btn btn-outline-dark menu-btn me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu" aria-label="Menú">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
     </button>
 
+    <!-- Menú de navegación (solo visible ≥1400px) -->
     <nav class="top-nav d-flex header-left">
-      <a href="/categorias/pulseras.php">Pulseras</a>
-      <a href="/categorias/collares.php">Collares</a>
-      <a href="/categorias/pendientes.php">Pendientes</a>
-      <a href="/categorias/anillos.php">Anillos</a>
-      <a href="/categorias/contactame.php">Contáctanos</a>
+      <a href="/J_S25_Tienda_Online/categorias/categoria.php?categoria=Pulseras">Pulseras</a>
+      <a href="/J_S25_Tienda_Online/categorias/categoria.php?categoria=Collares">Collares</a>
+      <a href="/J_S25_Tienda_Online/categorias/categoria.php?categoria=Pendientes">Pendientes</a>
+      <a href="/J_S25_Tienda_Online/categorias/categoria.php?categoria=Anillos">Anillos</a>
+      <a href="/J_S25_Tienda_Online/categorias/contactame.php">Contáctanos</a>
     </nav>
   </div>
 
   <!-- Sección centro -->
   <div class="header-section header-center">
-    <a href="/index.php" class="brand" aria-label="LARANA JEWELRY">LARANA JEWELRY</a>
+    <a href="/J_S25_Tienda_Online/index.php" class="brand" aria-label="LARANA JEWELRY">LARANA JEWELRY</a>
   </div>
 
   <!-- Sección derecha -->
@@ -128,7 +194,8 @@ $usuario = $_SESSION['usuario'] ?? null;
 
     <?php if ($usuario): ?>
       <div class="user-greeting">
-        <a href="../tienda_login_php/perfil.php" class="logout-link" title="Perfil">
+        <!-- <span>Hola, <?= htmlspecialchars($usuario['nombre']) ?></span> -->
+        <a href="/J_S25_Tienda_Online/tienda_login_php/perfil.php" class="logout-link" title="Perfil">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
             viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.5"
             stroke-linecap="round" stroke-linejoin="round"
@@ -140,7 +207,7 @@ $usuario = $_SESSION['usuario'] ?? null;
         </a>
       </div>
     <?php else: ?>
-      <a href="../tienda_login_php/login.php" class="icon-link" title="Usuario" id="userLoginLink">
+      <a href="/J_S25_Tienda_Online/tienda_login_php/login.php" class="icon-link" title="Usuario" id="userLoginLink">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24">
           <circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 14 0v1"/>
         </svg>
@@ -155,7 +222,7 @@ $usuario = $_SESSION['usuario'] ?? null;
         }
       }
     ?>
-    <a href="../tienda_login_php/carrito.php" class="icon-link" title="Carrito" aria-label="Carrito">
+    <a href="/J_S25_Tienda_Online/tienda_login_php/carrito.php" class="icon-link" title="Carrito" aria-label="Carrito">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="#111" stroke-width="1.5" viewBox="0 0 24 24">
         <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
       </svg>
@@ -176,11 +243,11 @@ $usuario = $_SESSION['usuario'] ?? null;
   </div>
   <div class="offcanvas-body">
     <nav class="d-flex flex-column">
-      <a href="/categorias/pulseras.php" class="mb-2">Pulseras</a>
-      <a href="/categorias/collares.php" class="mb-2">Collares</a>
-      <a href="/categorias/brazaletes.php" class="mb-2">Brazaletes</a>
-      <a href="/categorias/anillos.php" class="mb-2">Anillos</a>
-      <a href="/categorias/contactame.php" class="mb-2">Contáctanos</a>
+      <a href="pulseras.php" class="mb-2">Pulseras</a>
+      <a href="collares.php" class="mb-2">Collares</a>
+      <a href="brazaletes.php" class="mb-2">Brazaletes</a>
+      <a href="anillos.php" class="mb-2">Anillos</a>
+      <a href="contactame.php" class="mb-2">Contáctanos</a>
     </nav>
   </div>
 </div>

@@ -23,6 +23,7 @@ $usuario = $_SESSION['usuario'] ?? null;
   <!-- HEADER -->
   <?php include __DIR__ . '/includes/header.php'; ?>
 
+
   <!-- HERO -->
   <section id="hero" class="hero">
     <div class="overlay"></div>
@@ -109,20 +110,20 @@ $usuario = $_SESSION['usuario'] ?? null;
   <section id="categorias" class="categorias container">
     <h2>Categorías</h2>
     <div class="grid-categorias">
-      <a class="categoria" href="/categorias/pendientes.php">
+      <a class="categoria" href="categorias/categoria.php?categoria=Pendientes">
         <div class="cat-media"><img src="images/pendientes.jpg" alt="Pendientes"></div>
         <p>Pendientes</p>
       </a>
-      <a class="categoria" href="/categorias/collares.php">
+      <a class="categoria" href="categorias/categoria.php?categoria=Collares">
         <div class="cat-media"><img src="images/collares.jpg" alt="Collares"></div>
         <p>Collares</p>
       </a>
-      <a class="categoria" href="/categorias/pulseras.php">
-        <div class="cat-media"><img src="images/pulseras/pulsera_minimal.jpg" alt="Pulseras"></div>
+      <a class="categoria" href="categorias/categoria.php?categoria=Pulseras">
+        <div class="cat-media"><img src="images/pulsera.jpg" alt="Pulseras"></div>
         <p>Pulseras</p>
       </a>
-      <a class="categoria" href="/categorias/anillos.php">
-        <div class="cat-media"><img src="images/anillos/anillo_minimal.jpg" alt="Anillos"></div>
+      <a class="categoria" href="categorias/categoria.php?categoria=Anillos">
+        <div class="cat-media"><img src="images/anillos.jpg" alt="Anillos"></div>
         <p>Anillos</p>
       </a>
     </div>
@@ -132,26 +133,13 @@ $usuario = $_SESSION['usuario'] ?? null;
   <section id="opciones" class="opciones container">
     <h2>Explora nuestras secciones</h2>
     <div class="grid-opciones">
-      <a class="btn-opcion" href="/categorias/pulseras.php">Pulseras</a>
-      <a class="btn-opcion" href="/categorias/collares.php">Collares</a>
-      <a class="btn-opcion" href="/categorias/pendientes.php">Pendientes</a>
-      <a class="btn-opcion" href="/categorias/anillos.php">Anillos</a>
-      <a class="btn-opcion" href="/categorias/contactame.php">Contáctanos</a>
-      <a class="btn-opcion" href="#ayuda">Necesitas ayuda</a>
+      <a class="btn-opcion" href="categorias/categoria.php?categoria=Pulseras">Pulseras</a>
+      <a class="btn-opcion" href="categorias/categoria.php?categoria=Collares">Collares</a>
+      <a class="btn-opcion" href="categorias/categoria.php?categoria=Pendientes">Pendientes</a>
+      <a class="btn-opcion" href="categorias/categoria.php?categoria=Anillos">Anillos</a>
+      <a class="btn-opcion" href="categorias/contactame.php">Contáctanos</a>
     </div>
   </section>
 
-  <!-- AYUDA -->
-  <section id="ayuda" class="ayuda container">
-    <h2>¿Necesitas ayuda?</h2>
-    <p>
-      Si tienes cualquier duda sobre nuestros productos, pedidos o envíos, 
-      no dudes en contactarnos. Puedes escribirnos a <a href="mailto:info@laranejewelry.com">info@laranejewelry.com</a> 
-      o llamar al <strong>+34 123 456 789</strong>.
-    </p>
-    <p>
-      También puedes consultar nuestra <a href="/categorias/contactame.php">página de contacto</a>.
-    </p>
-  </section>
-
 <?php include __DIR__ . '/includes/footer.php'; ?>
+
