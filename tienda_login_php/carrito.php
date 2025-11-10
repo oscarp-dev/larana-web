@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         ];
     }
 
-    // ✅ Si es AJAX → devolvemos JSON
+    //  Si es AJAX → devolvemos JSON
     if ($isAjax) {
         header('Content-Type: application/json');
         echo json_encode([
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         exit;
     }
 
-    // 🚪 Si no es AJAX → redirigimos normalmente
+    //  Si no es AJAX → redirigimos normalmente
     header("Location: carrito.php");
     exit;
 }
@@ -127,7 +127,7 @@ include __DIR__ . '/../includes/header.php';
       </div>
       <div style="text-align:right;">
         <h3>Total: <?= number_format($total,2) ?> €</h3>
-        <a href="procesar_pedido.php" class="btn-dark">Finalizar pedido</a>
+        <a href="pago.php" class="btn-dark">Finalizar pedido</a>
       </div>
     </div>
   <?php endif; ?>

@@ -31,13 +31,13 @@ include __DIR__ . '/../includes/header.php';
 <section class="producto-detalle container">
   <div class="producto-layout">
 
-    <!-- 🖼️ Imagen -->
+    <!--  Imagen -->
     <div class="producto-media">
       <img src="../<?= htmlspecialchars($producto['imagen'])?>" 
            alt="<?= htmlspecialchars($producto['nombre']) ?>">
     </div>
 
-    <!-- ℹ️ Información -->
+    <!--  Información -->
     <div class="producto-info">
       <h1 class="titulo"><?= htmlspecialchars($producto['nombre']) ?></h1>
       <p class="precio">€<?= htmlspecialchars($producto['precio']) ?></p>
@@ -76,12 +76,12 @@ include __DIR__ . '/../includes/header.php';
   </div>
 </section>
 
-<!-- 🔸 SECCIÓN DE RESEÑAS -->
+<!--  SECCIÓN DE RESEÑAS -->
 <section class="reviews container">
   <h2>Opiniones de nuestros clientes</h2>
 
   <?php
-  // 📊 Calcular la media de estrellas y el total de reseñas
+  //  Calcular la media de estrellas y el total de reseñas
   $stmt_avg = $conn->prepare("
       SELECT 
           ROUND(AVG(stars), 1) AS average_rating,
@@ -94,7 +94,7 @@ include __DIR__ . '/../includes/header.php';
   $average_rating = $rating_data['average_rating'];
   $total_reviews = $rating_data['total_reviews'];
 
-  // 🎯 Mostrar resumen de valoración
+  //  Mostrar resumen de valoración
 if ($total_reviews > 0) {
     $rounded = round($average_rating);
     echo '<div class="rating-summary">';
@@ -112,7 +112,7 @@ if ($total_reviews > 0) {
 
   <div class="reviews-list">
     <?php
-    // 🧾 Obtener reseñas del producto
+    //  Obtener reseñas del producto
     $stmt_reviews = $conn->prepare("
         SELECT name, stars, text, created_at 
         FROM reviews 
@@ -140,7 +140,7 @@ if ($total_reviews > 0) {
     ?>
   </div>
 
-  <!-- 📝 Formulario para dejar una reseña -->
+  <!--  Formulario para dejar una reseña -->
   <form id="reviewForm" method="POST" action="../tienda_login_php/agregar_resena.php" class="review-form">
     <h3 class="review-title">Escribe tu reseña</h3>
     <input type="hidden" name="product_id" value="<?= $id ?>">
@@ -167,7 +167,7 @@ if ($total_reviews > 0) {
   </form>
 </section>
 
-<!-- 📜 Script para enviar la reseña sin recargar la página -->
+<!--  Script para enviar la reseña sin recargar la página -->
 <script>
 document.getElementById('reviewForm').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -191,7 +191,7 @@ document.getElementById('reviewForm').addEventListener('submit', async (e) => {
 });
 </script>
 <script>
-// ⭐ Interactividad de las estrellas
+//  Interactividad de las estrellas
 const stars = document.querySelectorAll('.star-rating .fa-star');
 const starsInput = document.getElementById('stars');
 let selected = 0;
