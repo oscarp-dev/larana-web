@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errores)) {
         try {
-            // Si se envía una nueva contraseña, se actualiza encriptada
+            // Lógica de actualización de usuario (con o sin contraseña)
             if (!empty($password)) {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 $sql = "UPDATE usuarios 
@@ -59,29 +59,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             direccion = :direccion, admin = :admin
                         WHERE id = :id";
                 $params = [
-                    ':nombre' => $nombre,
-                    ':apellido' => $apellido,
-                    ':email' => $email,
-                    ':password' => $hashedPassword,
-                    ':telefono' => $telefono,
-                    ':direccion' => $direccion,
-                    ':admin' => $admin,
-                    ':id' => $id
+                    ':nombre' => $nombre, ':apellido' => $apellido, ':email' => $email, 
+                    ':password' => $hashedPassword, ':telefono' => $telefono, 
+                    ':direccion' => $direccion, ':admin' => $admin, ':id' => $id
                 ];
             } else {
-                // Si no cambia la contraseña, no la tocamos
                 $sql = "UPDATE usuarios 
                         SET nombre = :nombre, apellido = :apellido, email = :email, 
                             telefono = :telefono, direccion = :direccion, admin = :admin
                         WHERE id = :id";
                 $params = [
-                    ':nombre' => $nombre,
-                    ':apellido' => $apellido,
-                    ':email' => $email,
-                    ':telefono' => $telefono,
-                    ':direccion' => $direccion,
-                    ':admin' => $admin,
-                    ':id' => $id
+                    ':nombre' => $nombre, ':apellido' => $apellido, ':email' => $email, 
+                    ':telefono' => $telefono, ':direccion' => $direccion, ':admin' => $admin, ':id' => $id
                 ];
             }
 
@@ -90,14 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Si el admin edita su propio perfil, actualiza la sesión
             if ($_SESSION['usuario']['id'] == $id) {
-                $_SESSION['usuario'] = array_merge($_SESSION['usuario'], [
-                    'nombre' => $nombre,
-                    'apellido' => $apellido,
-                    'email' => $email,
-                    'telefono' => $telefono,
-                    'direccion' => $direccion,
-                    'admin' => $admin
-                ]);
+                // Lógica de actualización de sesión
+                $_SESSION['usuario'] = array_merge($_SESSION['usuario'], 
+                    compact('nombre', 'apellido', 'email', 'telefono', 'direccion', 'admin'));
             }
 
             $_SESSION['mensaje_exito'] = "✅ Usuario actualizado correctamente.";
@@ -106,22 +90,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
             $errores[] = "Error al guardar los cambios: " . htmlspecialchars($e->getMessage());
         }
-    } else {
-        // Cargar los datos actuales para mantener el formulario relleno
-        $stmt = $conn->prepare("SELECT * FROM usuarios WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-        $usuario_a_editar = $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+    } 
+    
+    // Cargar los datos actuales para mantener el formulario relleno en caso de errores en POST
+    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+    $usuario_a_editar = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 include __DIR__ . '/../includes/header.php';
 ?>
 
-<main class="container">
-    <h2>Editar usuario #<?= htmlspecialchars($usuario_a_editar['id'] ?? '') ?></h2>
+<main class="main-content container">
+    <h2 class="form-title">Editar usuario #<?= htmlspecialchars($usuario_a_editar['id'] ?? '') ?></h2>
 
     <?php if (!empty($errores)): ?>
-        <div style="color:red;">
+        <div class="error-container">
             <ul>
                 <?php foreach ($errores as $error): ?>
                     <li><?= htmlspecialchars($error) ?></li>
@@ -131,67 +115,69 @@ include __DIR__ . '/../includes/header.php';
     <?php endif; ?>
 
     <?php if ($usuario_a_editar): ?>
-        <form action="modificar_usuarios.php" method="post">
+        <form action="modificar_usuarios.php" method="post" class="form-card">
             <input type="hidden" name="id" value="<?= htmlspecialchars($usuario_a_editar['id']) ?>">
 
-            <p>
-                <label>Nombre:</label><br>
-                <input type="text" name="nombre" value="<?= htmlspecialchars($usuario_a_editar['nombre']) ?>" required>
-            </p>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($_POST['nombre'] ?? $usuario_a_editar['nombre']) ?>" required>
+            </div>
 
-            <p>
-                <label>Apellido:</label><br>
-                <input type="text" name="apellido" value="<?= htmlspecialchars($usuario_a_editar['apellido']) ?>" required>
-            </p>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" value="<?= htmlspecialchars($_POST['apellido'] ?? $usuario_a_editar['apellido']) ?>" required>
+            </div>
 
-            <p>
-                <label>Email:</label><br>
-                <input type="email" name="email" value="<?= htmlspecialchars($usuario_a_editar['email']) ?>" required>
-            </p>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? $usuario_a_editar['email']) ?>" required>
+            </div>
 
-            <p>
-                <label>Nueva contraseña:</label>
-                <div style="align-items:center; gap:10px;">
+            <div class="form-group">
+                <label for="password">Nueva contraseña:</label>
+                <div class="input-password-group">
                     <input 
                         type="password" 
                         name="password" 
                         id="password"
-                        style="flex:1;"
+                        placeholder="Dejar vacío para no cambiar"
                     >
                     <button 
                         type="button" 
                         id="togglePassword"
-                        style="cursor:pointer;"
+                        class="btn-toggle-password"
                     >
                         👁️
                     </button>
                 </div>
-            </p>
+            </div>
 
-            <p>
-                <label>Teléfono:</label><br>
-                <input type="text" name="telefono" value="<?= htmlspecialchars($usuario_a_editar['telefono']) ?>" required>
-            </p>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" value="<?= htmlspecialchars($_POST['telefono'] ?? $usuario_a_editar['telefono']) ?>" required>
+            </div>
 
-            <p>
-                <label>Dirección:</label><br>
-                <input type="text" name="direccion" value="<?= htmlspecialchars($usuario_a_editar['direccion']) ?>" required>
-            </p>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" value="<?= htmlspecialchars($_POST['direccion'] ?? $usuario_a_editar['direccion']) ?>" required>
+            </div>
 
-            <p>
-                <label>Administrador:</label><br>
-                <select name="admin">
-                    <option value="0" <?= $usuario_a_editar['admin'] == 0 ? 'selected' : '' ?>>No</option>
-                    <option value="1" <?= $usuario_a_editar['admin'] == 1 ? 'selected' : '' ?>>Sí</option>
+            <div class="form-group">
+                <label for="admin">Administrador:</label>
+                <select id="admin" name="admin" class="select-field">
+                    <option value="0" <?= ($usuario_a_editar['admin'] ?? 0) == 0 ? 'selected' : '' ?>>No</option>
+                    <option value="1" <?= ($usuario_a_editar['admin'] ?? 0) == 1 ? 'selected' : '' ?>>Sí</option>
                 </select>
-            </p>
+            </div>
 
-            <p>
+            <div class="form-info">
                 <strong>Fecha de registro:</strong> <?= htmlspecialchars($usuario_a_editar['fecha_registro']) ?>
-            </p>
+            </div>
 
-            <button type="submit">Guardar cambios</button>
-            <a href="perfil.php" style="margin-left:10px;">Volver</a>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a href="perfil.php" class="btn btn-secondary">Volver</a>
+            </div>
         </form>
     <?php endif; ?>
 </main>

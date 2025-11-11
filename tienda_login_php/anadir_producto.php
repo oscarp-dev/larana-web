@@ -10,17 +10,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
-// Si no hay usuario logueado, redirige
-if (empty($_SESSION['usuario'])) {
-    header('Location: login.php');
-    exit;
-}
-
-$usuario = $_SESSION['usuario'];
-
-if ($_SESSION['usuario']['admin'] !== 1) {
-    exit("Acceso denegado");
+// Si no hay usuario logueado o no es admin, salimos.
+if (empty($_SESSION['usuario']) || $_SESSION['usuario']['admin'] !== 1) {
+    if (!isset($_GET['is_modal'])) {
+        header('Location: login.php');
+        exit;
+    } else {
+        exit('<div class="alert alert-danger">Acceso denegado.</div>');
+    }
 }
 
 $mensaje = "";
@@ -35,12 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Manejo de imagen
     $imagen = $_FILES['imagen']['name'];
-    $directorio = __DIR__ . "/../images/";
+    $directorio = __DIR__ . "/../images/"; 
     $rutaDestino = $directorio . basename($imagen);
 
-    
     if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
-
+        
         $sql = "INSERT INTO productos (nombre, descripcion, precio, stock, imagen, categoria)
                 VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -49,12 +45,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->bindValue(2, $descripcion);
         $stmt->bindValue(3, $precio);
         $stmt->bindValue(4, $stock, PDO::PARAM_INT);
-        $rutaBD = "images/" . $imagen; 
+        $rutaBD = "../images/" . $imagen;
         $stmt->bindValue(5, $rutaBD);
         $stmt->bindValue(6, $categoria);
 
         if ($stmt->execute()) {
             $mensaje = "✅ Producto añadido correctamente";
+            // Éxito: Recargamos la página principal (perfil.php)
+            echo '<script>
+                alert("Producto añadido correctamente. El modal se cerrará.");
+                // Si la acción fue exitosa, cerramos el modal y recargamos la página padre (perfil.php)
+                window.parent.location.reload(); 
+            </script>';
+            exit;
         } else {
             $mensaje = "❌ Error al guardar en BD";
         }
@@ -64,8 +67,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-include __DIR__ . '/../includes/header.php';
-
+// ====================================================================
+// HTML CONDICIONAL: Si NO es modal, incluimos el layout completo
+// ====================================================================
+if (!isset($_GET['is_modal'])): 
+    include __DIR__ . '/../includes/header.php';
 ?>
 
 <body class="bg-light">
@@ -77,45 +83,74 @@ include __DIR__ . '/../includes/header.php';
         </div>
         <div class="card-body">
 
-            <form action="aniadir_producto.php" method="POST" enctype="multipart/form-data">
+<?php endif; // Cierre de !isset($_GET['is_modal']) ?>
 
-                <div class="mb-3">
-                    <label class="form-label">Nombre del Producto</label>
-                    <input type="text" name="nombre" class="form-control" required>
-                </div>
+<?php if (isset($_GET['is_modal'])): // Si es modal, incluimos encabezados del modal ?>
 
-                <div class="mb-3">
-                    <label class="form-label">Descripción</label>
-                    <textarea name="descripcion" class="form-control" rows="3" required></textarea>
-                </div>
+<div class="modal-header card-header-dark-elegant">
+    <h5 class="modal-title m-0 text-white" id="addProductModalLabel">AÑADIR NUEVO PRODUCTO</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+</div>
+<div class="modal-body">
 
-                <div class="mb-3">
-                    <label class="form-label">Precio (€)</label>
-                    <input type="number" step="0.01" name="precio" class="form-control" required>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label">Stock</label>
-                    <input type="number" step="1" name="stock" class="form-control" required>
-                </div>
+<?php endif; ?>
 
-                <div class="mb-3">
-                    <label class="form-label">Categoría</label>
-                    <select name="categoria" required> 
-                        <option value="Pulseras">Pulsera</option>
-                        <option value="Collares">Collar</option>
-                        <option value="Pendientes">Pendiente</option>
-                        <option value="Anillos">Anillo</option>
-                    </select>
-                </div>
+    <?php if (!empty($mensaje)): ?>
+        <div class="alert alert-<?php echo strpos($mensaje, '✅') !== false ? 'success' : 'danger'; ?> text-center">
+            <?php echo $mensaje; ?>
+        </div>
+    <?php endif; ?>
 
-                <div class="mb-3">
-                    <label class="form-label">Imagen del Producto</label>
-                    <input type="file" name="imagen" class="form-control" accept="image/*" required>
-                </div>
+    <form action="anadir_producto.php" method="POST" enctype="multipart/form-data" 
+        <?php if (isset($_GET['is_modal'])): ?> target="_self" <?php endif; ?>>
 
-                <button type="submit" class="btn btn-dark-elegant text-gold w-100">Guardar Producto</button>
-            </form>
+        <div class="mb-3">
+            <label class="form-label">Nombre del Producto</label>
+            <input type="text" name="nombre" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea name="descripcion" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Precio (€)</label>
+            <input type="number" step="0.01" name="precio" class="form-control" required>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Stock</label>
+            <input type="number" step="1" name="stock" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Categoría</label>
+            <select name="categoria" class="form-select" required> 
+                <option value="Pulseras">Pulsera</option>
+                <option value="Collares">Collar</option>
+                <option value="Pendientes">Pendiente</option>
+                <option value="Anillos">Anillo</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Imagen del Producto</label>
+            <input type="file" name="imagen" class="form-control" accept="image/*" required>
+        </div>
+
+        <button type="submit" class="btn btn-dark-elegant w-100 mt-3">Guardar Producto</button>
+    </form>
+    
+<?php if (isset($_GET['is_modal'])): // Cierre de modal ?>
+
+</div>
+<div class="modal-footer justify-content-center">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+</div>
+
+<?php else: // Cierre de la versión NO modal ?>
+
             <br>
             <div class="text-center">
                 <a href="perfil.php" class="btn btn-secondary text-white w-50">Volver a perfil</a>
@@ -124,6 +159,9 @@ include __DIR__ . '/../includes/header.php';
     </div>
 </div>
 
-<!-- BOOTSTRAP JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <?php include __DIR__ . '/../includes/footer.php'; ?>
+</body>
+</html>
+
+<?php endif; ?>

@@ -169,61 +169,96 @@ body {
    HERO
 =================== */
 .hero {
-  height: 68vh;
-  min-height: 500px;
-  background: url('./images/hero.jpg') center center / cover no-repeat;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-  overflow: hidden;
-  animation: heroFadeIn 1.2s ease-in-out;
+    height: 75vh; 
+    min-height: 550px;
+    background: url('./images/hero.jpg') center center / cover no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--blanco);
+    overflow: hidden;
+    animation: heroFadeIn 1.2s ease-in-out;
 }
 
 .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.38);
-  backdrop-filter: brightness(0.9);
-  animation: overlayFadeIn 1.5s ease-in-out forwards;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55); 
+    backdrop-filter: none;
+    animation: overlayFadeIn 1.5s ease-in-out forwards;
 }
 
 .hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-  padding: 0 20px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: contentAppear 1.6s ease-out forwards;
-  animation-delay: 0.4s;
+    position: relative;
+    z-index: 2;
+    max-width: 900px; 
+    padding: 0 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: contentAppear 1.6s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+.hero-subtitle {
+    font-family: var(--font-body); 
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--dorado); 
+    letter-spacing: 5px; 
+    margin-bottom: 10px;
+    text-transform: uppercase;
 }
 
 .hero h2 {
-  font-size: 2.8rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    font-family: var(--font-heading);
+    font-size: 3.8rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 25px; 
+    line-height: 1.1;
+    color: var(--blanco);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 25px;
+}
+
+.hero h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background-color: var(--dorado);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .hero .btn {
-  background-color: var(--dorado);
-  color: white;
-  padding: 12px 32px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+    background-color: var(--dorado);
+    color: var(--blanco);
+    padding: 14px 40px;
+    border-radius: 30px; 
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
 }
 
 .hero .btn:hover {
-  background-color: var(--dorado-osc);
-  transform: translateY(-2px);
+    /* Asumo que --dorado-hover es tu variable de color al pasar el mouse */
+    background-color: var(--dorado-hover); 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
+
+/* * NOTA: Las reglas @keyframes (heroFadeIn, overlayFadeIn, contentAppear)
+* deben estar definidas en tu CSS para que las animaciones funcionen.
+*/
 
 /* ==== ANIMACIONES ==== */
 @keyframes heroFadeIn {
@@ -290,7 +325,7 @@ body {
 
 .btn-line{
   width:100%; background:transparent; color:var(--negro);
-  border:1px solid var(--dorado); border-radius:24px; padding:9px 14px;
+  border:1.5px solid var(--dorado); border-radius:10px; padding:9px 14px;
   cursor:pointer; transition:all .25s ease; font-family:inherit;
 }
 .btn-line:hover{ background:var(--dorado); color:#fff; }
@@ -300,6 +335,14 @@ body {
   padding:12px 26px; border-radius:28px; text-decoration:none; transition:opacity .25s ease;
 }
 .btn-dark:hover{ opacity:.9; }
+.producto > a.btn-line {
+    margin-bottom: 10px; /* Espacio debajo del botón "Descripción" */
+}
+
+/* Opcional: Para asegurar que la form no tenga margen por defecto */
+.producto form {
+    margin: 0;
+}
 
 /* Permitir que los enlaces <a> con clase .btn-line se vean igual que los botones */
 a.btn-line,
@@ -310,26 +353,101 @@ a.btn-line:visited {
 }
 
 
-/* ===================
-   HISTORIA 
-=================== */
-.historia{
-  background:var(--beige);
-  padding:90px 0;
-  border-top:1px solid var(--borde);
-  border-bottom:1px solid var(--borde);
+/* ======================================= */
+/* --- SECCIÓN HISTORIA (BANNER ELEGANTE) --- */
+/* ======================================= */
+
+.historia {
+    padding: 80px 0; /* Espacio vertical amplio */
+    /* Color de fondo para diferenciar el banner (usando la variable gris-claro) */
+    background-color: var(--gris-claro, #efeff0); 
 }
-.historia-inner{
-  display:flex; align-items:center; justify-content:space-between; gap:70px;
+
+.historia-inner {
+    display: flex; /* Habilitar el diseño de dos columnas */
+    align-items: center; /* Centrar verticalmente los elementos */
+    gap: 50px; /* Espacio entre la imagen y el texto */
+    max-width: 1100px; /* Limitar el ancho del contenido */
+    margin: 0 auto;
+    padding: 0 20px;
 }
-.historia-img{
-  flex:0 0 520px; max-width:520px;
-  border:1px solid var(--dorado); border-radius:12px; overflow:hidden;
-  box-shadow:0 8px 24px rgba(0,0,0,.08);
+
+/* Invertir el orden en pantallas pequeñas */
+@media (max-width: 900px) {
+    .historia-inner {
+        flex-direction: column; /* Apilar la imagen y el texto */
+        gap: 30px;
+    }
 }
-.historia-img img{ display:block; width:100%; height:100%; object-fit:cover; }
-.historia-texto h2{ font-size:1.8rem; margin:0 0 14px; }
-.historia-texto p{ color:#333; line-height:1.6; margin:0 0 22px; max-width:520px; }
+
+/* --- IMAGEN --- */
+.historia-img {
+    flex: 1; /* Ocupa el 50% del espacio */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Sombra elegante */
+    border-radius: 8px;
+    overflow: hidden; 
+}
+
+.historia-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease-in-out; 
+}
+
+.historia-img img:hover {
+    transform: scale(1.03);
+}
+
+/* --- TEXTO --- */
+.historia-texto {
+    flex: 1; /* Ocupa el otro 50% del espacio */
+    padding: 20px 0;
+}
+
+.historia-texto h2 {
+    font-size: 2.2em;
+    font-weight: 300; /* Títulos ligeros y elegantes */
+    color: var(--negro, #222);
+    margin-bottom: 20px;
+    line-height: 1.2;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+/* Separador sutil bajo el título */
+.historia-texto h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--dorado, #c6a664);
+    margin-top: 10px;
+}
+
+.historia-texto p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* --- BOTÓN --- */
+.historia-texto .btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: var(--dorado, #c6a664);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.historia-texto .btn:hover {
+    background: var(--dorado-hover, #b0915a);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
 
 /* ===================
    CATEGORÍAS
@@ -356,84 +474,133 @@ a.btn-line:visited {
   font-weight:600; font-size:1.05rem; text-shadow:0 2px 6px rgba(0,0,0,.45);
 }
 
-/* ===================
-   FOOTER (Versión mejorada)
-=================== */
+/* ======================================= */
+/* --- FOOTER (PIE DE PÁGINA) --- */
+/* ======================================= */
 
 .footer {
-  background: #111;
-  color: #fff;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  margin-top: 80px;
-  font-family: 'Karla', sans-serif;
+    background-color: var(--negro); 
+    color: var(--blanco);
+    padding-top: 60px;
+    font-family: var(--font-body); 
 }
 
 .footer-inner {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 60px 10%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 120px 20px; /* Aumentado de 100px a 120px */
 }
 
-.footer-left p {
-  font-size: 0.9rem;
-  color: #bbb;
-  letter-spacing: 0.3px;
-  margin: 0;
-}
-
-.footer-left span {
-  color: var(--dorado);
-}
-
-.footer-links {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  flex-wrap: wrap;
-}
-
-.footer-links a {
-  color: var(--dorado);
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: var(--dorado-osc);
-  transform: translateY(-2px);
-}
-
-/* Línea sutil superior */
-.footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: rgba(255,255,255,0.08);
-}
-
-/* === Responsive === */
-@media (max-width: 800px) {
-  .footer-inner {
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
     flex-direction: column;
-    align-items: center;
+    position: relative;
+}
+
+/* --- Separador Sutil entre Columnas (Línea Dorada Vertical) --- */
+.footer-column:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -25px;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background-color: var(--dorado);
+    opacity: 0.3;
+}
+
+
+.footer-heading {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--dorado); 
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.footer-column a,
+.footer-column p {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 2.2; 
+    transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: var(--dorado); 
+}
+
+/* Eliminamos el estilo de bloque de cookies ya que ahora es un enlace */
+/* .footer-text-block, .footer-text-block span { display: none; } */ 
+
+
+/* Enlaces de Redes Sociales */
+/* --- Estilos para los Iconos de Redes Sociales --- */
+
+.social-links {
+    margin-left: 10px;
+    margin-top: 5px; /* Más espacio sobre las redes */
+    display: flex; /* Usamos flex para control de alineación */
+    gap: 20px; /* Espacio entre los iconos */
+}
+
+.social-links a {
+    /* Quitamos el margen derecho que no era necesario con 'gap' */
+    margin-right: 0; 
+    /* El color base viene de .footer-column a */
+}
+
+.social-links i {
+    font-size: 1.8rem; /* Iconos más grandes y visibles */
+    transition: color 0.3s ease;
+    color: rgba(255, 255, 255, 0.7); /* Color inicial suave */
+}
+
+.social-links a:hover i {
+    color: var(--dorado); /* Efecto hover en color dorado */
+}
+
+
+/* --- Barra de Copyright (Parte Inferior) --- */
+.footer-bottom {
     text-align: center;
-  }
-  .footer-links {
-    justify-content: center;
-  }
+    padding: 20px 20px;
+    background-color: rgba(0, 0, 0, 0.2); 
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+/* --- Responsive para Footer --- */
+@media (max-width: 768px) {
+    .footer-inner {
+        flex-direction: column;
+        gap: 30px;
+        padding-bottom: 40px;
+    }
+    .footer-column {
+        min-width: auto;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 20px;
+    }
+    .footer-column:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    .footer-column:not(:last-child)::after {
+        content: none;
+    }
 }
 /* ===================
    NUEVAS SECCIONES
@@ -533,40 +700,57 @@ a.btn-line:visited {
 }
 .Titulo_Usu{
   margin-bottom: 50px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 10px;
 }
 .Info_Usu{
   margin-left: 50px;
   text-align: left;
   margin-bottom: 60px;
 }
-.Boton_Sesion{
-  max-width: 600px;
-  padding: 12px;
-  background: #c6a664;
-  border-radius: 12px;
-  border: 2px solid var(--borde);
-  text-align: center;
-  font-size: 18px;
-  font-weight: 600;
+.Boton_Sesion {
+    max-width: 300px;
+    width: 90%;
+    display: block;
+    margin: 20px auto;
+    
+    padding: 12px 20px;
+    background: #c6a664;
+    border-radius: 8px;
+    border: 2px solid var(--borde, #a38852);
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.Boton_Sesion:hover{
-  background: #b38f53;
-  border-color: #866a3a62;
+.Boton_Sesion:hover {
+    background: #b0915a;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 
-.perfil-historial{
-  margin-top: 80px;
-  padding: 40px 20px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-  border: 1px solid var(--borde);
-  text-align: center;
+.perfil-historial {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px 25px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--borde, #e0e0e0);
+    text-align: left;
 }
-.Titutlo_Pedidos{
-  margin-bottom: 50px;
+
+.Titutlo_Pedidos {
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.6em;
+    color: #000000;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 
@@ -659,21 +843,485 @@ a.btn-line:visited {
     margin-bottom: 40px;
 }
 
-/* Estilo para el botón (clase única: .btn-agregar-producto) */
+/* ======================================= */
+/* --- ESTILO DEL BOTÓN AÑADIR PRODUCTO (Perfil Admin) --- */
+/* ======================================= */
 .btn-agregar-producto {
-    display: inline-block; 
+    /* Fondo dorado/amarillo fuerte */
+    background-color: #b38f53; 
+    /* Texto blanco (o el color que tenías, pero blanco es común en botones dorados) */
+    color: #ffffff;
+    
     padding: 10px 20px;
-    background-color: #b8860b; 
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
+    
+    /* Le quita el contorno (border) que pediste */
+    border: none;
+    border-radius: 5px; /* Bordes ligeramente redondeados */
+    
+    cursor: pointer;
+    font-size: 1rem;
     font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    text-transform: uppercase;
+    
+    /* Asegura que el botón se muestre como un bloque con tamaño */
+    display: inline-block; 
+    
+    /* Efecto de transición para el hover */
+    transition: background-color 0.3s ease;
+    
+    /* Sombra sutil para darle profundidad */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-agregar-producto:hover {
-    background-color: #c6a664; 
-    transform: translateY(-2px); 
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    /* Dorado ligeramente más oscuro al pasar el ratón */
+    background-color: #C5A132;
+}
+/* Estilo para el header personalizado oscuro y dorado */
+.card-header-dark-elegant {
+    background-color: var(--negro); /* Fondo negro */
+    border-bottom: 2px solid var(--dorado); /* Línea dorada sutil */
+    color: var(--blanco) !important;
+}
+
+/* Estilo para los títulos de sección dentro del modal */
+.modal-title {
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+}
+
+/* Fondo del cuerpo del modal blanco para contraste */
+.modal-body {
+    background-color: var(--blanco);
+    padding: 30px;
+}
+
+/* Estilo de los labels del formulario */
+.form-label {
+    font-weight: 600;
+    color: var(--negro);
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Estilo de los campos de entrada y textarea */
+.form-control, .form-select {
+    border: 1px solid #ccc;
+    border-radius: 0; /* Bordes cuadrados, más modernos */
+    padding: 10px 12px;
+    box-shadow: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--dorado); /* Resaltar con dorado al enfocar */
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25); /* Sombra suave dorada */
+    outline: none;
+}
+
+/* Estilo para el botón de guardar */
+.btn-dark-elegant {
+    background-color: var(--negro); 
+    color: var(--dorado) !important; 
+    border: 1px solid var(--negro);
+    border-radius: 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-dark-elegant:hover {
+    background-color: var(--dorado);
+    color: var(--negro) !important;
+    border-color: var(--dorado);
+}
+
+/* Footer del modal para el botón de Cancelar */
+.modal-footer {
+    border-top: 1px solid #eee;
+    background-color: #f8f8f8;
+}
+
+/* Botón de cerrar (la X blanca) */
+.btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%); /* Hace el icono X blanco */
+}
+
+
+/* --- ESTILOS DE CONTENEDOR Y TÍTULO --- */
+/* Estilo general para centrar el contenido principal */
+.main-content.container {
+    max-width: 800px; /* Ancho máximo para el contenido */
+    margin: 40px auto; /* Centrar y añadir espacio */
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+}
+
+.form-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2em;
+    border-bottom: 2px solid #b8860b; /* Línea azul sutil */
+    padding-bottom: 10px;
+}
+
+/* --- ESTILOS DE ERRORES --- */
+.error-container {
+    background-color: #fcebeb; /* Fondo rojo muy claro */
+    border: 1px solid #f09595;
+    color: #c0392b; /* Texto rojo oscuro */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.error-container ul {
+    list-style: disc inside;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- ESTILOS DE LA TARJETA Y FORMULARIO --- */
+.form-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Estilo general para todos los inputs y selects */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group .select-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Asegura que el padding no aumente el ancho */
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: #c6a664; /* Resaltar al enfocar */
+    outline: none;
+}
+
+/* --- CAMPO DE CONTRASEÑA ESPECÍFICO --- */
+.input-password-group {
+    display: flex;
+    align-items: center;
+}
+.input-password-group input {
+    flex-grow: 1; /* El input ocupa el espacio disponible */
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.btn-toggle-password {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-left: none;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    line-height: 1; /* Ajustar el emoji */
+}
+
+/* --- INFO Y ACCIONES --- */
+.form-info {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-left: 4px solid #b8860b;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.form-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start; /* Alinear a la izquierda */
+}
+
+/* --- ESTILO DE BOTONES --- */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #c6a664; /* Azul primario */
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #b8860b;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Gris para "Volver" */
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+}
+
+
+
+/* ======================================= */
+/* --- VARIABLES GLOBALES (Asegúrate de que estén definidas en style.css) --- */
+/* ======================================= */
+:root {
+    /* Nueva elección de fuentes para un look más clásico/editorial */
+    --font-heading: 'Times New Roman', Times, serif; /* Clásico, atemporal */
+    --font-body: 'Arial', Helvetica, sans-serif; /* Limpio, legible */
+    
+    --dorado: #c6a664; 
+    --negro: #222222; 
+    --gris-oscuro: #444444; /* Más oscuro para mejor contraste */
+    --blanco: #ffffff; 
+    --gris-claro: #fafafa; /* Un blanco roto, muy sutil */
+    --borde-sutil: #dddddd;
+}
+
+/* --- Estilos del Contenedor (Asumo que usas .container-page) --- */
+.container-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ======================================= */
+/* --- ESTILOS DE LA PÁGINA DE HISTORIA (historia.php) --- */
+/* ======================================= */
+
+/* --- Encabezado Principal --- */
+.historia-page-header {
+    background-color: var(--blanco); 
+    padding: 80px 20px 40px 20px; 
+    text-align: center;
+    border-bottom: none; 
+}
+
+.historia-page-header h1 {
+    font-family: var(--font-body); 
+    font-size: 3em; 
+    font-weight: 300; 
+    margin-top: 0;
+    margin-bottom: 0;
+    color: var(--negro); 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.historia-page-header h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background-color: var(--dorado);
+    margin: 15px auto 0 auto;
+}
+/* --- Contenido General de la Página --- */
+.historia-page-content {
+    padding-top: 60px;
+    padding-bottom: 80px;
+    background-color: var(--blanco);
+}
+
+/* --- Introducción / Cita Inicial --- */
+.historia-intro {
+    background-color: var(--blanco); 
+    border: 1px solid var(--borde-sutil); 
+    border-radius: 4px; 
+    max-width: 1000px; 
+    margin: 0 auto 70px auto; 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05); 
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.intro-text-content {
+    flex: 2;
+    padding: 60px 40px 60px 60px;
+    text-align: left;
+}
+
+.intro-text {
+    font-family: var(--font-body);
+    font-size: 1.3em;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--gris-oscuro);
+    line-height: 1.6;
+    margin: 0;
+    letter-spacing: normal;
+    max-width: 100%;
+}
+
+.intro-text strong {
+    color: var(--negro);
+    font-weight: 600;
+}
+
+.intro-image-detail {
+    flex: 1;
+    background-color: var(--gris-claro);
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro-detail-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    opacity: 0.85;
+    filter: grayscale(10%);
+}
+
+@media (max-width: 768px) {
+    .historia-intro {
+        flex-direction: column;
+        padding: 0;
+    }
+    .intro-text-content {
+        padding: 40px 20px;
+    }
+    .intro-image-detail {
+        order: -1;
+        height: 200px;
+        padding: 0;
+        width: 100%;
+    }
+    .intro-detail-img {
+        border-radius: 4px 4px 0 0;
+    }
+}
+/* --- Línea de Tiempo (Disposición Mejorada) --- */
+
+/* --- Línea de Tiempo (Disposición Mejorada) --- */
+
+.historia-timeline {
+    border-left: none; 
+    padding-left: 0; 
+    padding-bottom: 0;
+    margin-bottom: 60px;
+    max-width: 900px; 
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 40px; /* Reducimos el espacio entre ítems para que se vean más conectados */
+}
+
+.timeline-item {
+    position: relative;
+    padding: 0 30px; /* Más padding horizontal */
+    margin-bottom: 0; 
+    border-bottom: 1px solid var(--borde-sutil); 
+    padding-bottom: 30px;
+}
+
+.timeline-item:last-child {
+    border-bottom: none; 
+    padding-bottom: 0; /* Quitar padding inferior del último item */
+}
+
+.timeline-item::before {
+    content: none; /* Aseguramos que no haya círculos */
+}
+
+.timeline-title {
+    font-family: var(--font-heading); /* Fuente elegante para títulos de hito */
+    font-size: 2.2em; /* Un poco más grande para darle importancia */
+    font-weight: 400; /* Peso medio, legible y elegante */
+    color: var(--negro);
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.2;
+    letter-spacing: 0.5px; /* Sutil espaciado */
+}
+
+.timeline-title::after {
+    /* Separador dorado sutil bajo el título del hito */
+    content: '';
+    display: block;
+    width: 50px; /* Un poco más largo */
+    height: 1px;
+    background-color: var(--dorado);
+    margin-top: 15px; /* Más espacio entre título y línea */
+    margin-bottom: 20px; /* Espacio entre línea y párrafo */
+}
+
+.timeline-item p {
+    font-family: var(--font-body); /* Fuente del cuerpo para la legibilidad */
+    font-size: 1em;
+    color: var(--gris-oscuro);
+    line-height: 1.7;
+    text-align: left; /* Aseguramos la alineación a la izquierda */
+}
+
+.timeline-item strong {
+    color: var(--dorado); /* Destacamos las palabras clave en dorado */
+    font-weight: 600; /* Un poco más fuerte para el énfasis */
+}
+
+/* --- Bloque de Cita Final --- */
+.historia-quote {
+    text-align: center;
+    padding: 50px; /* Más relleno */
+    border: none; /* Quitamos el borde para mayor limpieza */
+    background-color: var(--gris-claro); /* Fondo muy claro para diferenciar */
+    border-radius: 4px; /* Bordes menos redondeados */
+    max-width: 800px;
+    margin: 60px auto 0 auto;
+}
+
+.historia-quote p {
+    font-family: var(--font-heading); 
+    font-size: 1.6em; /* Más impactante */
+    font-style: italic;
+    color: var(--negro);
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.historia-quote span {
+    display: block;
+    font-weight: 500;
+    color: var(--dorado);
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 2px; /* Más espacio entre letras */
 }
