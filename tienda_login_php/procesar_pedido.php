@@ -5,7 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once "db_connect.php";
 
-// Verificar usuario logueado
 if (empty($_SESSION['usuario']['id'])) {
     header('Location: ./login.php');
     exit;
@@ -28,12 +27,12 @@ foreach ($carrito as $item) {
 }
 
 $user_id = (int) $_SESSION['usuario']['id'];
+$order_id = null;
 
 try {
     // Iniciar transacción
     $conn->beginTransaction();
 
-    // 1️⃣ Insertar pedido
     $sqlPedido = "INSERT INTO pedidos (usuario_id, total, estado) VALUES (:usuario_id, :total, 'pendiente')";
     $stmtPedido = $conn->prepare($sqlPedido);
     $stmtPedido->execute([
@@ -41,10 +40,8 @@ try {
         ':total' => $total
     ]);
 
-    // Obtener ID del pedido
     $order_id = $conn->lastInsertId();
 
-    // 2️⃣ Insertar detalles del pedido
     $sqlDetalle = "INSERT INTO detalle_pedidos (pedido_id, producto_id, cantidad, precio) 
                    VALUES (:pedido_id, :producto_id, :cantidad, :precio)";
     $stmtDetalle = $conn->prepare($sqlDetalle);
@@ -58,22 +55,35 @@ try {
         ]);
     }
 
-    // Confirmar transacción
     $conn->commit();
+
+    $nombreCliente = $_SESSION['usuario']['nombre'] ?? 'Cliente';
+    $emailCliente = $_SESSION['usuario']['email'] ?? null;
+    $resumen = "";
+
+    if ($emailCliente) {
+        $resumen = "<ul>";
+        foreach ($carrito as $producto) {
+            $nombre = htmlspecialchars($producto['nombre']);
+            $cantidad = (int)$producto['cantidad'];
+            $precio = number_format($producto['precio'], 2, ',', '.'); // Ejemplo con formato europeo
+            $resumen .= "<li>{$nombre} x {$cantidad} - {$precio}€</li>";
+        }
+        $resumen .= "</ul>";        
+    }
 
     // Vaciar carrito
     unset($_SESSION['carrito']);
 
-    // Redirigir con éxito
     header("Location: dashboard.php?pedido=ok&order_id={$order_id}");
     exit;
 
 } catch (Exception $e) {
-    // Revertir si hay error
-    $conn->rollBack();
+    if ($conn->inTransaction()) {
+        $conn->rollBack();
+    }
 
-    // Mostrar error temporalmente (solo para depuración)
-    echo "<pre style='color:red;'>Error: " . htmlspecialchars($e->getMessage()) . "</pre>";
+    echo "<pre style='color:red;'>Error al procesar el pedido: " . htmlspecialchars($e->getMessage()) . "</pre>";
     exit;
 }
 ?>
