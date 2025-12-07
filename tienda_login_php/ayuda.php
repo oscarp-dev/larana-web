@@ -3,6 +3,7 @@ include '../includes/header.php';
 $base_url = '/J_S25_Tienda_Online'; 
 ?>
 
+
 <style>
     .btn-dark-elegant {
         background-color: #b38f53;

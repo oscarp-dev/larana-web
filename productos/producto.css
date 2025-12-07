@@ -19,6 +19,7 @@
     color: var(--negro);
 }
 
+
 /* --- LAYOUT DEL PRODUCTO (GRID) --- */
 .producto-layout-grid {
     display: grid;

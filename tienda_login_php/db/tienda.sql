@@ -113,30 +113,31 @@ CREATE TABLE `productos` (
   `stock` int(11) DEFAULT 0,
   `imagen` varchar(255) DEFAULT NULL,
   `categoria` varchar(50) DEFAULT NULL,
-  `fecha_creacion` timestamp NULL DEFAULT current_timestamp()
+  `fecha_creacion` timestamp NULL DEFAULT current_timestamp(),
+  `destacado` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `categoria`, `fecha_creacion`) VALUES
-(1, 'Pulsera Dorada', 'Pulsera elegante con baño dorado y diseño minimalista.', 120.00, 10, 'images/producto2.jpg', 'Pulseras', '2025-10-24 02:41:50'),
-(2, 'Collar Elegante', 'Collar con colgante brillante ideal para ocasiones especiales.', 150.00, 10, 'images/producto3.jpg', 'Collares', '2025-10-24 02:41:50'),
-(3, 'Anillo Minimal', 'Anillo de diseño minimalista, perfecto para uso diario.', 90.00, 10, 'images/producto1.jpg', 'Anillos', '2025-10-24 02:41:50'),
-(4, 'Pendientes Clásicos', 'Pendientes dorados de estilo clásico y atemporal.', 110.00, 10, 'images/producto4.jpg', 'Pendientes', '2025-10-24 02:41:50'),
-(54, 'Collar con gema', 'Un collar elegante y brillante gracias a su ziorita de gran tamaño', 150.00, 50, 'images/collar_con_gema.jpg', 'Collares', '2025-11-05 02:42:49'),
-(55, 'Pulsera de Oro', 'Pulsera de oro', 230.00, 25, 'images/pulsera-triple-rigida-en-oro-amarillo-de-18-ct.jpg', 'Pulseras', '2025-11-11 11:20:59'),
-(56, 'Pulsera Trenzada \'Eslabón Fuerte\'', 'Pulsera de eslabones gruesos trenzados, bañada en oro amarillo de 18k. Su diseño robusto y atemporal añade una textura clásica a tu colección.', 135.00, 20, 'images/Pulsera-oro-amarillo-trenzada-Joyeria-Rincon.jpg', 'Pulseras', '2025-11-11 11:25:21'),
-(57, 'Malaquita Luxe', 'Pulsera de eslabones gruesos con un detalle de placa adornada y toques de malaquita verde esmeralda. Una pieza con carácter y un acabado de oro audaz.', 80.00, 70, 'images/malachite.avif', 'Pulseras', '2025-11-11 11:26:46'),
-(58, 'Set Pulseras \'Texturas Doradas\'', 'Una combinación audaz de pulseras de eslabones y texturas variadas con detalles de gema negra y verde. Diseñadas para llevarse apiladas, creando un look lleno de volumen y lujo.', 150.00, 200, 'images/a4c73094-489c-4bec-a435-5a328bf9b72d_b0eeb4d5-e3d2-4dfe-97d4-8bedbeebdcdd-138391_800x.webp', 'Pulseras', '2025-11-11 11:27:53'),
-(59, 'Collar Trenzado \'Cuerda Marinera\'', 'Collar corto de cadena gruesa trenzada. Su diseño clásico de eslabón trenzado proporciona textura y un volumen elegante para llevar solo o con otras piezas.', 150.00, 30, 'images/images.jpeg', 'Collares', '2025-11-11 11:29:05'),
-(60, 'Collar Personalizado \'Script Elegante\'', 'Collar con nombre grabado en estilo cursiva delicada. Bañado en oro, es la pieza de oro ideal para un regalo significativo o un detalle de personalización atemporal.', 55.00, 120, 'images/20.webp', 'Collares', '2025-11-11 11:29:59'),
-(61, 'Pendientes \'Greca Sol\'', 'Pendientes de botón en oro con un brillante central en montura pavé rodeado por un sutil detalle de patrón griego. Un toque de lujo y clasicismo.', 145.00, 110, 'images/21294_1_1200x1200.webp', 'Pendientes', '2025-11-11 11:31:16'),
-(62, 'Pendientes \'Unión Bicolor\'', 'Pendientes de botón con un diseño de eslabones entrelazados en oro amarillo y oro blanco/plata. Una pieza moderna y minimalista que combina dos tonos de metal.', 100.00, 40, 'images/images (1).jpeg', 'Pendientes', '2025-11-11 11:32:20'),
-(63, 'Anillos Apilables \'Trío Dorado\'', 'Set de anillos dorados con texturas variadas, diseñados para ser apilados o llevados individualmente. Incluye un anillo trenzado, uno liso de alta pulcritud y otro con detalle de relieve.', 250.00, 20, 'images/anillo-oro-2.webp', 'Anillos', '2025-11-11 11:33:27'),
-(64, 'Anillo de Banda \'Nido Dorado\'', 'Anillo ancho de diseño vanguardista con bandas de oro entrelazadas creando una estructura tridimensional. Una pieza moderna y sofisticada para un impacto visual fuerte.', 180.00, 40, 'images/04a80e088e104751863b62abda432774.webp', 'Anillos', '2025-11-11 11:34:13'),
-(65, 'Set de Anillos \'Corazón y Luna\'', 'Anillos apilables con diferentes texturas, centrados en un delicado diseño de corazón calado. Incluye un anillo de corona de laurel y una banda fina con media luna engarzada.', 90.00, 40, 'images/anillo-corazon-oro.jpg', 'Anillos', '2025-11-11 11:35:10');
+INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `categoria`, `fecha_creacion`, `destacado`) VALUES
+(1, 'Pulsera Dorada', 'Pulsera elegante con baño dorado y diseño minimalista.', 120.00, 10, 'images/producto2.jpg', 'Pulseras', '2025-10-24 02:41:50', 1),
+(2, 'Collar Elegante', 'Collar con colgante brillante ideal para ocasiones especiales.', 150.00, 10, 'images/producto3.jpg', 'Collares', '2025-10-24 02:41:50', 1),
+(3, 'Anillo Minimal', 'Anillo de diseño minimalista, perfecto para uso diario.', 90.00, 10, 'images/producto1.jpg', 'Anillos', '2025-10-24 02:41:50', 1),
+(4, 'Pendientes Clásicos', 'Pendientes dorados de estilo clásico y atemporal.', 110.00, 10, 'images/producto4.jpg', 'Pendientes', '2025-10-24 02:41:50', 1),
+(54, 'Collar con gema', 'Un collar elegante y brillante gracias a su ziorita de gran tamaño', 150.00, 50, 'images/collar_con_gema.jpg', 'Collares', '2025-11-05 02:42:49', 0),
+(55, 'Pulsera de Oro', 'Pulsera de oro', 230.00, 25, 'images/pulsera-triple-rigida-en-oro-amarillo-de-18-ct.jpg', 'Pulseras', '2025-11-11 11:20:59', 0),
+(56, 'Pulsera Trenzada \'Eslabón Fuerte\'', 'Pulsera de eslabones gruesos trenzados, bañada en oro amarillo de 18k. Su diseño robusto y atemporal añade una textura clásica a tu colección.', 135.00, 20, 'images/Pulsera-oro-amarillo-trenzada-Joyeria-Rincon.jpg', 'Pulseras', '2025-11-11 11:25:21', 0),
+(57, 'Malaquita Luxe', 'Pulsera de eslabones gruesos con un detalle de placa adornada y toques de malaquita verde esmeralda. Una pieza con carácter y un acabado de oro audaz.', 80.00, 70, 'images/malachite.avif', 'Pulseras', '2025-11-11 11:26:46', 0),
+(58, 'Set Pulseras \'Texturas Doradas\'', 'Una combinación audaz de pulseras de eslabones y texturas variadas con detalles de gema negra y verde. Diseñadas para llevarse apiladas, creando un look lleno de volumen y lujo.', 150.00, 200, 'images/a4c73094-489c-4bec-a435-5a328bf9b72d_b0eeb4d5-e3d2-4dfe-97d4-8bedbeebdcdd-138391_800x.webp', 'Pulseras', '2025-11-11 11:27:53', 0),
+(59, 'Collar Trenzado \'Cuerda Marinera\'', 'Collar corto de cadena gruesa trenzada. Su diseño clásico de eslabón trenzado proporciona textura y un volumen elegante para llevar solo o con otras piezas.', 150.00, 30, 'images/images.jpeg', 'Collares', '2025-11-11 11:29:05', 0),
+(60, 'Collar Personalizado \'Script Elegante\'', 'Collar con nombre grabado en estilo cursiva delicada. Bañado en oro, es la pieza de oro ideal para un regalo significativo o un detalle de personalización atemporal.', 55.00, 120, 'images/20.webp', 'Collares', '2025-11-11 11:29:59', 0),
+(61, 'Pendientes \'Greca Sol\'', 'Pendientes de botón en oro con un brillante central en montura pavé rodeado por un sutil detalle de patrón griego. Un toque de lujo y clasicismo.', 145.00, 110, 'images/21294_1_1200x1200.webp', 'Pendientes', '2025-11-11 11:31:16', 0),
+(62, 'Pendientes \'Unión Bicolor\'', 'Pendientes de botón con un diseño de eslabones entrelazados en oro amarillo y oro blanco/plata. Una pieza moderna y minimalista que combina dos tonos de metal.', 100.00, 40, 'images/images (1).jpeg', 'Pendientes', '2025-11-11 11:32:20', 0),
+(63, 'Anillos Apilables \'Trío Dorado\'', 'Set de anillos dorados con texturas variadas, diseñados para ser apilados o llevados individualmente. Incluye un anillo trenzado, uno liso de alta pulcritud y otro con detalle de relieve.', 250.00, 20, 'images/anillo-oro-2.webp', 'Anillos', '2025-11-11 11:33:27', 0),
+(64, 'Anillo de Banda \'Nido Dorado\'', 'Anillo ancho de diseño vanguardista con bandas de oro entrelazadas creando una estructura tridimensional. Una pieza moderna y sofisticada para un impacto visual fuerte.', 180.00, 40, 'images/04a80e088e104751863b62abda432774.webp', 'Anillos', '2025-11-11 11:34:13', 0),
+(65, 'Set de Anillos \'Corazón y Luna\'', 'Anillos apilables con diferentes texturas, centrados en un delicado diseño de corazón calado. Incluye un anillo de corona de laurel y una banda fina con media luna engarzada.', 90.00, 40, 'images/anillo-corazon-oro.jpg', 'Anillos', '2025-11-11 11:35:10', 0);
 
 -- --------------------------------------------------------
 

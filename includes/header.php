@@ -3,6 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 // AJUSTE CRUCIAL: Definir la base URL para rutas absolutas
+
 $base_url = '/J_S25_Tienda_Online';
 $usuario = $_SESSION['usuario'] ?? null;
 ?>

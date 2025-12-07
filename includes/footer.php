@@ -21,6 +21,7 @@
         margin-bottom: 0; 
         padding-bottom: 50px; 
     }
+    
 
     /* * Corrección de Ancho del Footer */
     .footer {

@@ -29,25 +29,54 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $precio = $_POST['precio'];
     $categoria = $_POST['categoria'];
     $stock = $_POST['stock'];
+    $destacado = isset($_POST['destacado']) ? 1 : 0;
 
-    // Manejo de imagen
+    // Manejo de imagen - RUTAS CORREGIDAS
     $imagen = $_FILES['imagen']['name'];
-    $directorio = __DIR__ . "/../images/"; 
-    $rutaDestino = $directorio . basename($imagen);
+    
+    // Directorio donde se guardarán las imágenes (relativo al servidor)
+    $directorio = $_SERVER['DOCUMENT_ROOT'] . '/J_S25_Tienda_Online/images/';
+    
+    // Asegurar que el directorio existe
+    if (!file_exists($directorio)) {
+        mkdir($directorio, 0777, true);
+    }
+    
+    // Generar nombre único para la imagen
+    $extension = pathinfo($imagen, PATHINFO_EXTENSION);
+    $nombre_imagen = time() . '_' . uniqid() . '.' . $extension;
+    $rutaDestino = $directorio . $nombre_imagen;
+    
+    // Ruta para guardar en la base de datos
+    $rutaBD = "images/" . $nombre_imagen;
 
-    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
+    // Validar que es una imagen
+    $check = getimagesize($_FILES["imagen"]["tmp_name"]);
+    if($check === false) {
+        $mensaje = "❌ El archivo no es una imagen válida.";
+    } 
+    // Validar tamaño (máximo 5MB)
+    elseif ($_FILES["imagen"]["size"] > 5000000) {
+        $mensaje = "❌ La imagen es demasiado grande (máximo 5MB).";
+    }
+    // Validar extensión
+    elseif(!in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+        $mensaje = "❌ Solo se permiten archivos JPG, JPEG, PNG, GIF y WebP.";
+    }
+    // Mover el archivo
+    elseif (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
         
-        $sql = "INSERT INTO productos (nombre, descripcion, precio, stock, imagen, categoria)
-                VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO productos (nombre, descripcion, precio, stock, imagen, categoria, destacado)
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(1, $nombre);
         $stmt->bindValue(2, $descripcion);
         $stmt->bindValue(3, $precio);
         $stmt->bindValue(4, $stock, PDO::PARAM_INT);
-        $rutaBD = "../images/" . $imagen;
         $stmt->bindValue(5, $rutaBD);
         $stmt->bindValue(6, $categoria);
+        $stmt->bindValue(7, $destacado, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
             $mensaje = "✅ Producto añadido correctamente";
@@ -59,11 +88,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </script>';
             exit;
         } else {
-            $mensaje = "❌ Error al guardar en BD";
+            $mensaje = "❌ Error al guardar en BD: " . $stmt->errorInfo()[2];
         }
 
     } else {
-        $mensaje = "❌ Error al subir la imagen";
+        $mensaje = "❌ Error al subir la imagen. Directorio: " . $directorio;
     }
 }
 
@@ -127,16 +156,23 @@ if (!isset($_GET['is_modal'])):
         <div class="mb-3">
             <label class="form-label">Categoría</label>
             <select name="categoria" class="form-select" required> 
-                <option value="Pulseras">Pulsera</option>
-                <option value="Collares">Collar</option>
-                <option value="Pendientes">Pendiente</option>
-                <option value="Anillos">Anillo</option>
+                <option value="Pulseras">Pulseras</option>
+                <option value="Collares">Collares</option>
+                <option value="Pendientes">Pendientes</option>
+                <option value="Anillos">Anillos</option>
             </select>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Imagen del Producto</label>
             <input type="file" name="imagen" class="form-control" accept="image/*" required>
+            <small class="text-muted">Formatos permitidos: JPG, JPEG, PNG, GIF, WebP. Tamaño máximo: 5MB</small>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="destacado" name="destacado" value="1">
+            <label class="form-check-label" for="destacado">Marcar como producto destacado</label>
+            <small class="form-text text-muted d-block">Los productos destacados aparecerán en la página principal y en la sección de destacados.</small>
         </div>
 
         <button type="submit" class="btn btn-dark-elegant w-100 mt-3">Guardar Producto</button>
