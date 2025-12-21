@@ -1,0 +1,178 @@
+/* ===================
+   AUTENTICACIÓN (LOGIN / REGISTRO)
+   Basado en la línea visual de LARANA JEWELRY
+=================== */
+
+/* --- Variables principales de la marca --- */
+:root {
+  --negro: #111;
+  --dorado: #c6a664;
+  --dorado-osc: #b38f53;
+  --gris: #fafafa;
+  --beige: #f8f4ef;
+  --borde: #eaeaea;
+  --max: 1200px;
+}
+
+/* --- Fuente --- */
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&display=swap');
+
+/* --- Base general --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Karla', sans-serif;
+  color: var(--negro);
+  background: var(--beige);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* --- Contenedor principal --- */
+.auth-page {
+  width: 100%;
+  padding: 80px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.auth-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Títulos y subtítulos --- */
+.auth-box h2,
+.auth-box .title {
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--negro);
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.auth-box .muted {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1.8rem;
+}
+
+/* --- Inputs --- */
+.auth-box input[type="text"],
+.auth-box input[type="email"],
+.auth-box input[type="password"],
+.auth-box input[type="tel"] {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.auth-box input:focus {
+  border-color: var(--dorado);
+  box-shadow: 0 0 0 3px rgba(198, 166, 100, 0.15);
+  outline: none;
+}
+
+/* --- Checkbox y términos --- */
+.auth-box label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+.auth-box label a {
+  color: var(--dorado);
+  text-decoration: none;
+}
+
+.auth-box label a:hover {
+  text-decoration: underline;
+}
+
+/* --- Botón principal --- */
+.auth-box button {
+  width: 100%;
+  padding: 1rem;
+  background: var(--dorado);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.auth-box button:hover {
+  background: var(--dorado-osc);
+  transform: translateY(-2px);
+}
+
+/* --- Enlaces inferiores --- */
+.auth-box p {
+  margin-top: 1.6rem;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.auth-box p a {
+  color: var(--dorado);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-box p a:hover {
+  text-decoration: underline;
+}
+
+/* --- Mensajes de error o alerta --- */
+.message {
+  background-color: var(--beige);
+  border-left: 4px solid var(--dorado);
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #444;
+  border-radius: 6px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+  .auth-box {
+    padding: 2rem 1.5rem;
+  }
+
+  .auth-box h2 {
+    font-size: 1.6rem;
+  }
+}
+

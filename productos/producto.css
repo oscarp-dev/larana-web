@@ -1,0 +1,364 @@
+/* VARIABLES (Ajusta según tu paleta si es necesario) */
+:root {
+    --dorado: #c6a664;
+    --dorado-hover: #b0915a;
+    --negro: #222;
+    --gris-claro: #f8f8ff;
+    --borde: #e0e0e0;
+}
+
+/* ============================== */
+/* --- ESTILOS GENERALES Y LAYOUT --- */
+/* ============================== */
+
+.container-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: var(--negro);
+}
+
+
+/* --- LAYOUT DEL PRODUCTO (GRID) --- */
+.producto-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 40px 0;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--gris-claro);
+}
+
+/* Adaptación para móviles */
+@media (max-width: 900px) {
+    .producto-layout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- CAJA DE IMAGEN --- */
+.producto-media-box {
+    text-align: center;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.producto-imagen-principal {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+}
+
+/* ============================== */
+/* --- INFORMACIÓN DEL PRODUCTO --- */
+/* ============================== */
+
+.producto-info-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.producto-titulo {
+    font-size: 2.5em;
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: var(--negro);
+}
+
+.producto-precio {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--dorado);
+    margin: 0;
+}
+
+.producto-envio-info {
+    font-size: 0.9em;
+    color: #666;
+    border-bottom: 1px solid var(--borde);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+/* --- RATING PEQUEÑO JUNTO AL TÍTULO --- */
+.producto-rating-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--dorado);
+    font-size: 0.9em;
+}
+.rating-value {
+    color: var(--negro);
+    font-weight: 600;
+}
+.review-count {
+    color: #888;
+}
+.review-filled {
+    color: var(--dorado);
+}
+.review-empty {
+    color: #ccc;
+}
+
+
+/* --- BOTÓN DE COMPRA --- */
+.compra-form {
+    margin-bottom: 25px;
+}
+.btn-dorado {
+    width: 100%;
+    padding: 15px;
+    background: var(--dorado);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-dorado:hover {
+    background: var(--dorado-hover);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.btn-dorado i {
+    margin-right: 8px;
+}
+
+/* --- ATRIBUTOS DESTACADOS --- */
+.producto-atributos-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    font-size: 0.9em;
+    color: #444;
+}
+.producto-atributos-list li {
+    background: var(--gris-claro);
+    padding: 8px 10px;
+    border-radius: 4px;
+}
+.producto-atributos-list i {
+    color: var(--dorado);
+    margin-right: 6px;
+}
+
+/* --- DETALLES DE TEXTO (Descripción/Envíos) --- */
+.producto-detalles-texto {
+    margin-top: 40px; 
+    padding: 0 20px; 
+}
+
+.detalle-titulo {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--negro);
+    margin: 30px 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--dorado);
+}
+
+.detalle-texto-content p {
+    line-height: 1.6;
+    font-size: 1em;
+    color: #444;
+    margin-bottom: 20px; 
+}
+
+/* --- ESTILO ESPECÍFICO PARA ENVÍOS Y DEVOLUCIONES --- */
+.envio-list {
+    list-style: none; /* Quitamos los puntos por defecto */
+    padding: 0;
+    margin: 10px 0 20px 0;
+    color: #444;
+    line-height: 1.8;
+}
+
+.envio-list li {
+    position: relative;
+    padding-left: 25px; /* Espacio para el icono */
+}
+
+/* Decoración con icono (Font Awesome check mark) */
+.envio-list li::before {
+    content: '\f00c'; /* Código Unicode para fa-check */
+    font-family: 'Font Awesome 6 Free'; /* Necesario para que el content lo reconozca */
+    font-weight: 900; /* Necesario para el estilo 'solid' */
+    color: var(--dorado);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+/* ============================== */
+/* --- SECCIÓN DE RESEÑAS --- */
+/* ============================== */
+.reviews-section {
+    padding: 40px 20px;
+    background: var(--gris-claro);
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+.reviews-section-title {
+    text-align: center;
+    font-size: 2em;
+    color: var(--negro);
+    margin-bottom: 30px;
+}
+
+/* --- RESUMEN DE VALORACIÓN GRANDE --- */
+.rating-summary-full {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.review-filled-lg, .review-empty-lg {
+    font-size: 1.5em;
+    color: var(--dorado);
+}
+.review-empty-lg {
+    color: #ccc;
+}
+.rating-average {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left: 10px;
+    color: var(--negro);
+}
+.review-total-count {
+    font-size: 1em;
+    color: #666;
+    display: block;
+}
+.no-reviews-message {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+}
+
+/* --- LISTA DE RESEÑAS --- */
+.reviews-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+.review-item-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid var(--borde);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.review-header-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 10px;
+}
+.review-name-date {
+    display: flex;
+    align-items: baseline;
+}
+.review-user-name {
+    color: var(--negro);
+    font-size: 1.1em;
+}
+.review-date-text {
+    font-size: 0.8em;
+    color: #999;
+    margin-left: 10px;
+}
+.review-stars-display .review-filled-sm, .review-stars-display .review-empty-sm {
+    font-size: 0.9em;
+    color: var(--dorado);
+}
+.review-stars-display .review-empty-sm {
+    color: #ccc;
+}
+
+.review-text-content {
+    font-size: 0.95em;
+    color: #444;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* --- FORMULARIO DE RESEÑA --- */
+.review-form-card {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.review-form-title {
+    text-align: center;
+    color: var(--dorado);
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--dorado);
+    padding-bottom: 10px;
+}
+
+.form-group-review {
+    margin-bottom: 15px;
+}
+
+.review-form-card label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.review-form-card input[type="text"],
+.review-form-card textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+.review-form-card input:focus, .review-form-card textarea:focus {
+    border-color: var(--dorado);
+    outline: none;
+}
+
+.star-rating-input {
+    font-size: 1.5em;
+    color: #ccc;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.star-input-icon {
+    transition: color 0.1s;
+}
+.star-input-icon:hover, .star-input-icon.active-star {
+    color: var(--dorado);
+}
+
+.review-submit-btn {
+    margin-top: 20px;
+}
+
+.review-message-status {
+    font-weight: bold;
+    text-align: center;
+}
