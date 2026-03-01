@@ -67,7 +67,7 @@ C:\xampp\htdocs\
 
 Y acceder desde el navegador:
 
-http://localhost/J_S25_Tienda
+http://localhost/J_S25_Tienda_Online
 
 ---
 
