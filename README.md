@@ -57,7 +57,7 @@ Ejemplo:
 $host = "localhost";
 $user = "root";
 $password = "";
-$dbname = "larana_web";
+$dbname = "tienda";
 
 ### 5️⃣ Ejecutar en servidor local
 
@@ -67,7 +67,7 @@ C:\xampp\htdocs\
 
 Y acceder desde el navegador:
 
-http://localhost/larana-web
+http://localhost/J_S25_Tienda
 
 ---
 
