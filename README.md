@@ -46,7 +46,7 @@ composer install
 
 ### 4️⃣ Configurar base de datos
 
-- Crear una base de datos en MySQL.
+- Crear una base de datos en MariaDB.
 - Importar el archivo SQL.
 - Configurar las credenciales en:
 
