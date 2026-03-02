@@ -1,7 +1,7 @@
 # 💎 Larana Web – Tienda Online
 
 Aplicación web full stack desarrollada como tienda online para una joyería.  
-Incluye sistema completo de autenticación de usuarios, gestión de productos, carrito de compra y conexión a base de datos MySQL.
+Incluye sistema completo de autenticación de usuarios, gestión de productos, carrito de compra y conexión a base de datos MariaDB.
 
 ---
 
